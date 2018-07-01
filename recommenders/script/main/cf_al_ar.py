@@ -41,7 +41,7 @@ icm_al = dr.get_icm(arid=False,alid=True)
 icm_al.data = np.full(icm_al.data.shape[0],weight_al)
 ucm1 = urm*icm_al
 ucm2 = urm*icm_ar
-ucm = sp.hstack((ucm1.tocsr(),ucm2.tocsr()))
+ucm = sp.hstack((ucm1.tocsr(),ucm2.tocsr())).tocsr()
 
 rec = CF_AL_AR_BM25(urm=urm, ucm=ucm, binary=False, bm25=True, datareader=dr, mode=mode, verbose=True, verbose_evaluation= False, similarity='tversky')
 

@@ -24,6 +24,7 @@ eurm = sp.csr_matrix(urm.shape)
 if mode=='offline':icm = sp.csr_matrix(sp.load_npz('../../data/hybrid_icm_cat8_offline.npz'),dtype=np.float)
 if mode=='online':icm = sp.csr_matrix(sp.load_npz('../../data/hybrid_icm_cat8_online.npz'),dtype=np.float)
 
+icm = icm.tocsr()
 
 rec = CF_IB_BM25(urm=icm.T, binary=True, datareader=dr, mode=mode, verbose=True, verbose_evaluation= False)
 for c in configs_strange:
