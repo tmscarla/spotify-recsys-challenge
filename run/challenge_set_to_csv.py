@@ -13,6 +13,7 @@ of useful csv in order to make submissions in the right format.
 python challenge_set_to_csv.py path/to/challenge_set.json
 """
 
+
 def convert(path):
     # LOAD DATA
     data = json.load(open(ROOT_DIR + "/data/challenge/challenge_set.json"))
