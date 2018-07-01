@@ -1,11 +1,12 @@
 # Spotify-Challenge
 
 ## Setting up the environment:
-> TODO LELE
 
-## Installing the package:
->open terminal in root folder and run:  "python setup.py sdist" and "pip install -e ." 
-
+1. Clone or download the repository on a machine running Ubuntu.
+2. run "setup_ubuntu.sh" it will install the virtualenv, python dependencies, this reapository as package and compile cython code.
+3. activate the virtualenv to run any of the python scripts in run folder
+    > source py3env/bin/activate
+    
 
 ## Folders
 The structure is divided with the following scheme: 

@@ -47,4 +47,9 @@ python compileCython.py build_ext --inplace
 cd ../..
 
 
+echo ""
+echo ">>>>>>>>>>>>>>>>>> end  <<<<<<<<<<<<<<<<<<<<<<<<<<<"
+echo ""
+
+
 
