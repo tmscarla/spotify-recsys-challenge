@@ -123,7 +123,8 @@ spotiFFy.egg-info/PKG-INFO
 
 #NPZ
 *.npz
-
+!/final_npz_creative/*
+!/final_npz_main/*
 
 # Created by https://www.gitignore.io/api/jupyternotebook
 
@@ -133,6 +134,5 @@ spotiFFy.egg-info/PKG-INFO
 
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
-#
 
 # End of https://www.gitignore.io/api/jupyternotebook

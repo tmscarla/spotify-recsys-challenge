@@ -6,35 +6,30 @@ from boosts.match_boost import MatchBoost
 from boosts.tail_boost import TailBoost
 from boosts.album_boost import AlbumBoost
 from boosts.top_boost import TopBoost
-from utils.evaluator import Evaluator
 from utils.post_processing import *
 from utils.pre_processing import *
 from utils.submitter import Submitter
 from utils.ensembler import *
 from boosts.generate_similarity import generate_similarity
 
-
-
-####### PREPROCESSING ##################################################################
-
 # INIT
 dr = Datareader(mode='online', only_load=True, verbose=False)
 sb = Submitter(dr)
 
+####### LOAD MATRICES AFTER BAYESIAN OPTIMIZATION  #####################################
 
-####### RECOMMENDATION #################################################################
+cluster1 = sps.load_npz(ROOT_DIR + 'ensembled_creativeFIRE_ar1_online.npz')
+cluster2 = sps.load_npz(ROOT_DIR + 'ensembled_creativeFIRE_ar2_online.npz')
+cluster3 = sps.load_npz(ROOT_DIR + 'ensembled_creativeFIRE_ar3_online.npz')
+cluster4 = sps.load_npz(ROOT_DIR + 'ensembled_creativeFIRE_ar4_online.npz')
 
+clustered_approach_online = cluster1 + cluster2 + cluster3 + cluster4
+
+ensembled = sps.load_npz(ROOT_DIR + '/data/lele/ensembled_SUBMAIN_online.npz')
 
 ####### POSTPROCESSING #################################################################
 
-# LOAD AND COMBINE
-# eurm_lele = sps.load_npz(ROOT_DIR + '/data/lele/ensembled_CLUSTERARTISTScat4-5-6-8-10_online.npz')
-# eurm_std = sps.load_npz(ROOT_DIR + '/data/lele/ensembled_SUBCREATIVA_online.npz')
-#
-# eurm_ens = combine_two_eurms(eurm_lele, eurm_std, cat_first=[4, 5, 6, 8, 10])
-
-# LOAD MATRICES
-eurm_ens = sps.load_npz(ROOT_DIR + '/data/ensembled_creativeFIRE_online.npz')
+eurm_ens = combine_two_eurms(clustered_approach_online, ensembled, cat_first=[3, 4, 5, 8, 10])
 sim = generate_similarity('online')
 
 # HOLEBOOST
