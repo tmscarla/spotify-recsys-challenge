@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+source ../../py3env/bin/activate
+python ../bayesian_common_files/generic_bayesian.py 1 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 2 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 3 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 4 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 5 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 6 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 7 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 8 ndcg l1 SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 9 ndcg max SUBMAIN & python ../bayesian_common_files/generic_bayesian.py 10 ndcg l1 SUBMAIN
