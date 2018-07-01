@@ -1,4 +1,15 @@
-# Spotify-Challenge
+# Spotify Recsys Challenge 2018
+
+## Challenge
+The **[RecSys Challenge 2018](https://recsys-challenge.spotify.com)** is organized by Spotify, The University of Massachusetts, Amherst, and Johannes Kepler University, Linz.
+The goal of the challenge is to develop a system for the task of automatic playlist continuation.
+Given a set of playlist features, participants’ systems shall generate a list of recommended tracks that can be added to that playlist, thereby ‘continuing’ the playlist.
+
+The challenge is split into two parallel challenge tracks. In the main track, teams can only use data that is provided through the Million Playlist Dataset,
+while in the creative track participants can use external, public and freely available data sources to boost their system.
+
+## Overview
+This repo...
 
 ## Team members
 We are Creamy Firelies, a group of MSc students from Politecnico di Milano which
@@ -14,10 +25,13 @@ In order to load data in an easy way, we converted the original JSON files provi
 Since data are not publicly available, we cannot include it in the repo.
 
 There are two ways to include CSV files in the repo:
-   * If you have **original JSON** files:
-      * Run the jupyter notebook in /run/mdp_to_csv.ipynb
-      * Then run the script in /run
-        > python challenge_set_to_csv.py path/to/challenge_set.json
+   * If you have **original JSON** files, run the following two scripts
+   in order in the /run folder:
+    
+     > python mdp_to_csv.py path/to/challenge_set.json
+     
+     > python challenge_set_to_csv.py path/to/challenge_set.json
+     
    * If you are a **challenge organizer**, you can send us an email at creamy.fireflies@gmail.com
     and we will provide you as soon as possible the entire /data folder which you can simply add to the repo
     avoiding to convert all the files.
@@ -34,9 +48,11 @@ After these steps you should have the /data folder organized as follows:
     
 ## Setting up the environment:
 
-1. Clone or download the repository on a machine running Ubuntu.
-2. run "setup_ubuntu.sh" it will install the virtualenv, python dependencies, this reapository as package and compile cython code.
-3. activate the virtualenv to run any of the python scripts in run folder
+1. Clone the repository on a machine running Ubuntu.
+2. Run the following script to install the virtualenv, Python dependencies, the package of the repository
+ and compile Cython code.
+    > $ ./setup_ubuntu.sh
+3. Activate the virtualenv to run any of the python script in the repository
     > source py3env/bin/activate
     
 ## Folders
@@ -56,11 +72,14 @@ Here you have an overview of the struct of the project root:
 
 These main folders have a README.md that explains the structure of the package.
 
-## Final results
+## Reproduce our final results
+Once you have /data folder correctly filled with CSV files, if you want to reproduce
+our final submissions, move to /run folder
 
-## Reproduce results
+## Metrics
+Submissions are evaluated using three different metrics and inal rankings will be computed
+ by using the **[Borda Count](https://en.wikipedia.org/wiki/Borda_count)** election strategy.
 
-## How it works
 
 
 
