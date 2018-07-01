@@ -31,7 +31,7 @@ setup(
     author_email='creamy.fireflies@mail.polimi.it',
 
     # Choose your license
-    license='Apache Software License',
+    license='apache-2.0',
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -61,7 +61,7 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
     install_requires=['pandas', 'numpy', 'scipy',
-                      'cython', 'tqdm', 'scikit-optimize',
+                      'cython', 'tqdm', 'scikit-optimize','spotipy'
                        ],
 
     extras_require={},
