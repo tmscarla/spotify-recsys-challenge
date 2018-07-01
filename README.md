@@ -4,10 +4,10 @@
 We are Creamy Firelies, a group of MSc students from Politecnico di Milano which
 took part in the Spotify RecSys Challenge 2018.
 These are the team members:
-   * Sebastiano Antenucci
-   * Simone Boglio
-   * Emanuele Chioso
-   * Tommaso Scarlatti
+* **[Sebastiano Antenucci](https://github.com/sebastianoantenucci)**
+* **[Simone Boglio](https://github.com/bogliosimone)**
+* **[Emanuele Chioso](https://github.com/EmanueleChioso)**
+* **[Tommaso Scarlatti](https://github.com/tmscarla)**
 
 ## Data
 In order to load data in an easy way, we converted the original JSON files provided from Spotify in CSV files.

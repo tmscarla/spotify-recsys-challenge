@@ -75,7 +75,7 @@ eurm_lele_l1 = norm_l1_row(eurm_lele)
 nlp_fusion = a * eurm_l1 + (1.0 - a) * eurm_lele_l1
 
 if dr.online():
-    sparse.save_npz(ROOT_DIR + '/recommenders/script/main/online_npz/nlp_fusion_online.npz', nlp_fusion)
+    sparse.save_npz(ROOT_DIR + '/recommenders/script/creative/online_npz/nlp_fusion_online.npz', nlp_fusion)
 else:
-    sparse.save_npz(ROOT_DIR + '/recommenders/script/main/offline_npz/nlp_fusion_offline.npz', nlp_fusion)
+    sparse.save_npz(ROOT_DIR + '/recommenders/script/creative/offline_npz/nlp_fusion_offline.npz', nlp_fusion)
 
