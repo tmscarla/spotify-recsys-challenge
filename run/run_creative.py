@@ -11,6 +11,7 @@ from utils.post_processing import *
 from utils.pre_processing import *
 from utils.submitter import Submitter
 from utils.ensembler import *
+from boosts.generate_similarity import generate_similarity
 
 
 
@@ -34,7 +35,7 @@ sb = Submitter(dr)
 
 # LOAD MATRICES
 eurm_ens = sps.load_npz(ROOT_DIR + '/data/ensembled_creativeFIRE_online.npz')
-sim = sps.load_npz(ROOT_DIR + '/data/sim_online.npz')
+sim = generate_similarity('online')
 
 # HOLEBOOST
 hb = HoleBoost(similarity=sim, eurm=eurm_ens, datareader=dr, norm=norm_l1_row)

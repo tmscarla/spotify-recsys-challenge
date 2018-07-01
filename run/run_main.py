@@ -11,7 +11,7 @@ from utils.post_processing import *
 from utils.pre_processing import *
 from utils.submitter import Submitter
 from utils.ensembler import *
-
+from boosts.generate_similarity import generate_similarity
 
 
 ####### PREPROCESSING ##################################################################
@@ -33,8 +33,8 @@ sb = Submitter(dr)
 # eurm_ens = combine_two_eurms(eurm_lele, eurm_std, cat_first=[4, 5, 6, 8, 10])
 
 # LOAD MATRICES
-eurm_ens = sps.load_npz(ROOT_DIR + '/data/ensembled_creativeFIRE_online.npz')
-sim = sps.load_npz(ROOT_DIR + '/data/sim_online.npz')
+eurm_ens = sps.load_npz(ROOT_DIR + '/data/ensemble-online-data-06_25_18-00_02_43.npz')
+sim = generate_similarity('online')
 
 # HOLEBOOST
 hb = HoleBoost(similarity=sim, eurm=eurm_ens, datareader=dr, norm=norm_l1_row)
@@ -55,4 +55,4 @@ eurm_ens = ab.boost_eurm(categories=[3, 4, 7, 9], gamma=2, top_k=[3, 3, 10, 40])
 
 # SUBMISSION
 rec_list = eurm_to_recommendation_list_submission(eurm_ens, datareader=dr)
-sb.submit(rec_list, name='main_track')
+sb.submit(rec_list, name='main_track', track='main')

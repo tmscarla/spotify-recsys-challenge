@@ -11,7 +11,6 @@ This file has the only purpose to extract from the challenge set json file a lis
 of useful csv in order to make submissions in the right format.
 
 python challenge_set_to_csv.py path/to/challenge_set.json
-
 """
 
 def convert(path):

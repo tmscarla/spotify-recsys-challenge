@@ -34,7 +34,7 @@ spotify/challenge.v1/*
 *.json
 
 # EGG INFO and package building
-spotiFFy.egg-info/*
+CreamyFireflies.egg-info/*
 dist/*
 
 # RESULTS
