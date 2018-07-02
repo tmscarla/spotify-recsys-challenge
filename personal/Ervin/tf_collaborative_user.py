@@ -62,6 +62,13 @@ class TF_collaborative_user(Recommender):
         # Normalize the original URM to get cv for each track listened by the users
         user_pen = normalize(self.urm, axis=1, norm='l1')
 
+        # Calculate DF[t] & IDF[t]
+        dft = self.urm.sum(axis=0).A1
+        idft = np.log(self.urm.shape[0] / (dft + 1e-8))
+
+        # Multiply each listened track with its respective idf
+        URM_enhanced = self.urm.multiply(idft).tocsr()
+
         # Computer the eURM
         self.eurm = dot_product(self.model, user_pen, k=top_k, verbose=verbose, target_items=self.pid)
 
@@ -79,14 +86,14 @@ if __name__ == '__main__':
     topk = 750
 
     configs = [
-        {'cat': 10, 'knn': 100, 'power': 1},
-        {'cat': 9, 'knn': 200, 'power': 1},
-        {'cat': 8, 'knn': 100, 'power': 1},
+        {'cat': 10, 'knn': 100, 'power': 2.4},
+        {'cat': 9, 'knn': 200, 'power': 0.4},
+        {'cat': 8, 'knn': 100, 'power': 2},
         {'cat': 7, 'knn': 300, 'power': 1},
-        {'cat': 6, 'knn': 300, 'power': 1},
-        {'cat': 5, 'knn': 500, 'power': 1},
-        {'cat': 4, 'knn': 300, 'power': 1},
-        {'cat': 3, 'knn': 200, 'power': 1},
+        {'cat': 6, 'knn': 300, 'power': 2},
+        {'cat': 5, 'knn': 500, 'power': 2.4},
+        {'cat': 4, 'knn': 300, 'power': 1.8},
+        {'cat': 3, 'knn': 200, 'power': 2.2},
         {'cat': 2, 'knn': 500, 'power': 1}
     ]
 
@@ -101,9 +108,8 @@ if __name__ == '__main__':
         eurm = eurm + rec.eurm
         del rec.eurm
         del rec.model
-    #
 
     pids = dr.get_test_pids()
     eurm = eurm[pids]
     ev.evaluate(recommendation_list=eurm_to_recommendation_list(eurm, datareader=dr, remove_seed=True),
-                name="TFIDF_user_hybrid", old_mode=False)
+                name="tfidf_collaborative_user", old_mode=False)
