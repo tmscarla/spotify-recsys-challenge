@@ -19,7 +19,7 @@ The rest of the document is organized in the following way:
    * **Postprocessing:**
 
 ## Team members
-We are Creamy Firelies, a group of MSc students from Politecnico di Milano which
+We are Creamy Fireflies, a group of MSc students from Politecnico di Milano which
 took part in the Spotify RecSys Challenge 2018. These are the team members:
 
 Main track:

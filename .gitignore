@@ -11,6 +11,9 @@ results/*
 
 # README, not ignoring them
 !data/README.md
+!results/README.md
+!results/csv/README.md
+!submissions/README.md
 
 # SPOTIFY DATA
 spotify/data/*
