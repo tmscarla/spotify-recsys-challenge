@@ -13,12 +13,17 @@ This repo...
 
 ## Team members
 We are Creamy Firelies, a group of MSc students from Politecnico di Milano which
-took part in the Spotify RecSys Challenge 2018.
-These are the team members:
+took part in the Spotify RecSys Challenge 2018. These are the team members:
+
+Main track:
 * **[Sebastiano Antenucci](https://github.com/sebastianoantenucci)**
 * **[Simone Boglio](https://github.com/bogliosimone)**
 * **[Emanuele Chioso](https://github.com/EmanueleChioso)**
 * **[Tommaso Scarlatti](https://github.com/tmscarla)**
+
+Creative track:
+* **[Ervin Dervishaj](https://github.com/edervishaj)**
+* **[Jessica](https://github.com/JessicaKANG)**
 
 ## Data
 In order to load data in an easy way, we converted the original JSON files provided from Spotify in CSV files.
