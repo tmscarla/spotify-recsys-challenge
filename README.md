@@ -30,7 +30,7 @@ Main track:
 
 Creative track:
 * **[Ervin Dervishaj](https://github.com/edervishaj)**
-* **[Jessica](https://github.com/JessicaKANG)**
+* **[Shuwen Kang](https://github.com/JessicaKANG)**
 
 # Setup
 
@@ -127,5 +127,6 @@ Submissions are evaluated using three different metrics and inal rankings will b
 | **scipy**            |   >= 1.0.0     |   
 | **pandas**           |   >= 0.22.0    |  
 | **tqdm**             |   >= 4.19.5    |
+| **spotipy**          |   >= 2.4.4     |
 
 
