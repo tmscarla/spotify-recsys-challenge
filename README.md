@@ -9,7 +9,14 @@ The challenge is split into two parallel challenge tracks. In the main track, te
 while in the creative track participants can use external, public and freely available data sources to boost their system.
 
 ## Overview
-This repo...
+This repository contains all the approaches that we developed in order to solve the two tracks of the challenge.
+The rest of the document is organized in the following way:
+
+   * **Setup:** gives an overview of the project structure and instructions on how to gather data and 
+   setting up everything in order tu run our scripts.
+   * **Preprocessing:**
+   * **Algorithms:**
+   * **Postprocessing:**
 
 ## Team members
 We are Creamy Firelies, a group of MSc students from Politecnico di Milano which
@@ -25,6 +32,8 @@ Creative track:
 * **[Ervin Dervishaj](https://github.com/edervishaj)**
 * **[Jessica](https://github.com/JessicaKANG)**
 
+# Setup
+
 ## Data
 In order to load data in an easy way, we converted the original JSON files provided from Spotify in CSV files.
 Since data are not publicly available, we cannot include it in the repo.
@@ -33,13 +42,15 @@ There are two ways to include CSV files in the repo:
    * If you have **original JSON** files, run the following two scripts
    in order in the /run folder:
     
-     > python mdp_to_csv.py path/to/challenge_set.json
+     > python mpd_to_csv.py path/to/mpd
      
      > python challenge_set_to_csv.py path/to/challenge_set.json
      
    * If you are a **challenge organizer**, you can send us an email at creamy.fireflies@gmail.com
     and we will provide you as soon as possible the entire /data folder which you can simply add to the repo
     avoiding to convert all the files.
+
+Finally include the *challenge_set.json* file into /data/challenge folder.
  
 After these steps you should have the /data folder organized as follows:
    * original
@@ -50,7 +61,9 @@ After these steps you should have the /data folder organized as follows:
       * tracks.csv
       * train_interactions.csv
       * train_playlists.csv
-    
+   * challenge
+      * challenge_set.json
+
 ## Setting up the environment:
 
 1. Clone the repository on a machine running Ubuntu.
@@ -78,8 +91,16 @@ Here you have an overview of the struct of the project root:
 These main folders have a README.md that explains the structure of the package.
 
 ## Reproduce our final results
-Once you have /data folder correctly filled with CSV files, if you want to reproduce
-our final submissions, move to /run folder
+Once you have /data folder correctly filled with csv files, if you want to reproduce
+our final submissions, move to /run folder and run the following scripts:
+
+   * Main track
+     > python run_main.py
+   * Creative track
+     > python run_creative.py
+
+Once the computation is terminated, you should see the csv files ready to be submitted 
+in the /submissions folder.
 
 ## Metrics
 Submissions are evaluated using three different metrics and inal rankings will be computed
