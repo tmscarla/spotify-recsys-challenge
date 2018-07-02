@@ -79,7 +79,27 @@ our final submissions, move to /run folder
 ## Metrics
 Submissions are evaluated using three different metrics and inal rankings will be computed
  by using the **[Borda Count](https://en.wikipedia.org/wiki/Borda_count)** election strategy.
+ 
+# Preprocessing
+
+# Algorithms
+
+## Main track
+
+## Creative track
+
+# Postprocessing
 
 
+
+
+ ## Requirements
+| Package              | Version        |
+| ---------------------|:--------------:|  
+| **scikit-learn**     |   >= 0.19.1    |   
+| **numpy**            |   >= 1.14      |   
+| **scipy**            |   >= 1.0.0     |   
+| **pandas**           |   >= 0.22.0    |  
+| **tqdm**             |   >= 4.19.5    |
 
 
