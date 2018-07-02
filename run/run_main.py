@@ -19,14 +19,17 @@ sb = Submitter(dr)
 
 ####### LOAD MATRICES AFTER BAYESIAN OPTIMIZATION  #####################################
 
-cluster1 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_ar1_online.npz')
-cluster2 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_ar2_online.npz')
-cluster3 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_ar3_online.npz')
-cluster4 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_ar4_online.npz')
+cluster1 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar1_online.npz')
+cluster2 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar2_online.npz')
+cluster3 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar3_online.npz')
+cluster4 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar4_online.npz')
 
 clustered_approach_online = cluster1 + cluster2 + cluster3 + cluster4
 
-ensembled = sps.load_npz(ROOT_DIR + '/data/lele/ensembled_SUBMAIN_online.npz')
+ensembled1 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_MAIN_online_half1.npz')
+ensembled2 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_MAIN_online_half2.npz')
+
+ensembled = ensembled1 + ensembled2
 
 ####### POSTPROCESSING #################################################################
 

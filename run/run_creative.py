@@ -18,15 +18,18 @@ sb = Submitter(dr)
 
 ####### LOAD MATRICES AFTER BAYESIAN OPTIMIZATION  #####################################
 
-cluster1 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_creativeFIRE_ar1_online.npz')
-cluster2 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_creativeFIRE_ar2_online.npz')
-cluster3 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_creativeFIRE_ar3_online.npz')
-cluster4 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_creativeFIRE_ar4_online.npz')
+cluster1 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_creativeFIRE_ar1_online.npz')
+cluster2 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_creativeFIRE_ar2_online.npz')
+cluster3 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_creativeFIRE_ar3_online.npz')
+cluster4 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_creativeFIRE_ar4_online.npz')
 
 clustered_approach_online = cluster1 + cluster2 + cluster3 + cluster4
 
-ensembled = sps.load_npz(ROOT_DIR + '/data/lele/ensembled_SUBMAIN_online.npz')
 
+ensembled1 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_CREATIVE_online_half1.npz')
+ensembled2 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_CREATIVE_online_half2.npz')
+
+ensembled = ensembled1 + ensembled2
 ####### POSTPROCESSING #################################################################
 
 eurm_ens = combine_two_eurms(clustered_approach_online, ensembled, cat_first=[3, 4, 5, 8, 10])
