@@ -32,6 +32,11 @@ Creative track:
 * **[Ervin Dervishaj](https://github.com/edervishaj)**
 * **[Shuwen Kang](https://github.com/JessicaKANG)**
 
+We worked under the supervision of a PhD student, who helped us with the most complicated tasks and
+suggested several state of the art approaches:
+
+* **[Maurizio Ferrari Dacrema](https://github.com/maurizioFD)**
+
 # Setup
 
 ## Data
@@ -115,9 +120,6 @@ Submissions are evaluated using three different metrics and inal rankings will b
 ## Creative track
 
 # Postprocessing
-
-
-
 
  ## Requirements
 | Package              | Version        |
