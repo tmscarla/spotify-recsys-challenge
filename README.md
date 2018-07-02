@@ -77,7 +77,12 @@ After these steps you should have the /data folder organized as follows:
     > $ ./setup_ubuntu.sh
 3. Activate the virtualenv to run any of the python script in the repository
     > source py3env/bin/activate
-    
+  
+## Running the recommender  
+
+follow the instructions in the **[run subfolder](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**
+
+
 ## Folders
 Here you have an overview of the struct of the project root: 
 
