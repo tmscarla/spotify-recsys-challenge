@@ -1,4 +1,7 @@
-from sklearn.preprocessing.data import binarize
+"""
+@author Ervin Dervishaj
+@email vindervishaj@gmail.com
+"""
 
 from recommenders.recommender import Recommender
 from recommenders.similarity.s_plus import *
@@ -57,16 +60,10 @@ class TF_collaborative_user(Recommender):
             start_time = time.time()
 
         # Normalize the original URM to get cv for each track listened by the users
-        norm_urm = normalize(self.urm, axis=1, norm='l1')
-
-        # dft = self.urm.sum(axis=0).A1
-        # idft = np.log(self.urm.shape[0] / (dft + 1e-8))
-        #
-        # new_urm = 1.0 / ((self.urm*idft.reshape(-1,1)) + 1e-8)
-        # new_urm = new_urm.reshape(-1,1)
+        user_pen = normalize(self.urm, axis=1, norm='l1')
 
         # Computer the eURM
-        self.eurm = dot_product(self.model, norm_urm, k=top_k, verbose=verbose, target_items=self.pid)
+        self.eurm = dot_product(self.model, user_pen, k=top_k, verbose=verbose, target_items=self.pid)
 
         if verbose:
             print("time: " + str(int(time.time() - start_time) / 60))
@@ -74,23 +71,22 @@ class TF_collaborative_user(Recommender):
         return self.eurm
 
 if __name__ == '__main__':
-    dr = Datareader(verbose=False, mode='offline', only_load=True)
+    dr = Datareader(verbose=True, mode='offline', only_load=True)
     urm = dr.get_urm(binary=True)
     pid = dr.get_test_pids()
     ev = Evaluator(dr)
 
-    # knn = 300
     topk = 750
 
     configs = [
-        {'cat': 10, 'knn': 100, 'power': 2.4},
-        {'cat': 9, 'knn': 200, 'power': 0.4},
-        {'cat': 8, 'knn': 100, 'power': 2},
+        {'cat': 10, 'knn': 100, 'power': 1},
+        {'cat': 9, 'knn': 200, 'power': 1},
+        {'cat': 8, 'knn': 100, 'power': 1},
         {'cat': 7, 'knn': 300, 'power': 1},
-        {'cat': 6, 'knn': 300, 'power': 2},
-        {'cat': 5, 'knn': 500, 'power': 2.4},
-        {'cat': 4, 'knn': 300, 'power': 1.8},
-        {'cat': 3, 'knn': 200, 'power': 2.2},
+        {'cat': 6, 'knn': 300, 'power': 1},
+        {'cat': 5, 'knn': 500, 'power': 1},
+        {'cat': 4, 'knn': 300, 'power': 1},
+        {'cat': 3, 'knn': 200, 'power': 1},
         {'cat': 2, 'knn': 500, 'power': 1}
     ]
 
@@ -105,26 +101,9 @@ if __name__ == '__main__':
         eurm = eurm + rec.eurm
         del rec.eurm
         del rec.model
-
-    # pid = dr.get_test_pids(cat=10)
-    # for p in np.arange(2.4, 0.2, -0.2):
-    #     eurm = sp.csr_matrix(urm.shape)
-    #     rec.fit(urm, pid)
-    #     rec.compute_model(verbose=True, knn=100, save_model=False, power=p)
-    #     rec.compute_rating(top_k=topk, verbose=True, small=False)
-    #     eurm = eurm + rec.eurm
     #
 
     pids = dr.get_test_pids()
     eurm = eurm[pids]
     ev.evaluate(recommendation_list=eurm_to_recommendation_list(eurm, datareader=dr, remove_seed=True),
                 name="TFIDF_user_hybrid", old_mode=False)
-
-    # rec = TF_collaborative_user()
-    # rec.fit(urm, pid)
-    # rec.compute_model(verbose=True, knn=knn, save_model=False, power=2)
-    # # rec.model = sps.load_npz('tf_idf_user_sim_850.npz')
-    # # rec.model.data = np.power(rec.model.data, 2)
-    # rec.compute_rating(top_k=topk, verbose=True, small=True)
-    # ev.evaluate(recommendation_list=eurm_to_recommendation_list(rec.eurm, datareader=dr, remove_seed=True),
-    #             name="TFIDF_user_"+str(knn), old_mode=False)

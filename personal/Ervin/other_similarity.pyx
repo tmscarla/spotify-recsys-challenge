@@ -308,3 +308,119 @@ def audio_features_similarity(icm, knn=100, verbose=False, num_threads=64):
     del indices32, indptr32
 
     return res
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def items_in_common(model, urm, int knn, verbose=False, int num_threads=64):
+    cdef int[:] model_indptr, model_indices, urm_indptr, urm_indices, out_rows, out_cols
+    cdef float[:] model_data, urm_data, out_data
+    cdef int i, j, common, n_users, verb, n_threads, out_idx, t_i, t_j, idx, track_i, track_j
+
+    n_users = model.shape[0]
+    model_indptr = np.array(model.indptr, dtype=np.int32)
+    model_indices = np.array(model.indices, dtype=np.int32)
+    model_data = np.array(model.data, dtype=np.float32)
+
+    out_rows = np.zeros(n_users*knn, dtype=np.int32)
+    out_cols = np.zeros(n_users*knn, dtype=np.int32)
+    out_data = np.zeros(n_users*knn, dtype=np.float32)
+
+    urm_indptr = np.array(urm.indptr, dtype=np.int32)
+    urm_indices = np.array(urm.indices, dtype=np.int32)
+    urm_data = np.array(urm.data, dtype=np.float32)
+
+    progress = tqdm.tqdm(total=n_users, disable=not verbose)
+    progress.desc = 'Updating similarities'
+    progress.refresh()
+
+    n_threads = num_threads
+    if verbose:
+        verb = 1
+    else: verb = 0
+
+    cdef int counter = 0
+    cdef int * counter_add = address(counter)
+
+    for i in prange(n_users, schedule='dynamic', chunksize=100, nogil=True, num_threads=n_threads):
+        # Update progress bar
+        if verb:
+            counter_add[0] = counter_add[0] + 1
+            if counter_add[0]%(n_users/500)==0:
+                with gil:
+                    progress.desc = 'Updating similarities'
+                    progress.n = counter_add[0]
+                    progress.refresh()
+
+        # Index used to iterate over output arrays
+        out_idx = model_indptr[i]
+
+        # Index used to iterate over similar users to i
+        idx = model_indptr[i]
+
+        # Iterate over similar users to i
+        while idx < model_indptr[i+1]:
+            # user j
+            j = model_indices[idx]
+
+            common = 0
+
+            # Index that goes over tracks of user i
+            t_i = urm_indptr[i]
+
+            # Index that goes over tracks of user j
+            t_j = urm_indptr[j]
+
+            # Go over tracks of user i
+            while t_i < urm_indptr[i+1]:
+                track_i = urm_indices[t_i]
+
+                track_j = urm_indices[t_j]
+
+                # Go over tracks of user j
+                while track_j < track_i and t_j < urm_indptr[j+1]-1:
+                    t_j = t_j + 1
+                    track_j = urm_indices[t_j]
+
+                if track_j == track_i:
+                    common = common + 1
+
+                t_i = t_i + 1
+
+            out_rows[out_idx] = i
+            out_cols[out_idx] = j
+            out_data[out_idx] = model_data[idx] / common
+            out_idx = out_idx + 1
+
+            idx = idx + 1
+
+    progress.n = n_users
+    progress.desc = 'Build csr matrix'
+    progress.refresh()
+
+    coo = sps.coo_matrix((out_data, (out_rows, out_cols)), shape=(n_users, n_users))
+
+    cdef float [:] data
+    cdef int [:] indices32, indptr32
+
+    cdef int length = len(model_data)
+
+    indptr32 = np.empty(n_users + 1, dtype=np.int32)
+    indices32 = np.empty(length, dtype=np.int32)
+    data = np.empty(length, dtype=np.float32)
+    coo_tocsr32(n_users, n_users, length, &out_rows[0], &out_cols[0], &out_data[0], &indptr32[0], &indices32[0],
+               &data[0])
+
+    del out_rows, out_cols, out_data
+
+    res = sps.csr_matrix((data, indices32, indptr32), shape=(n_users, n_users), dtype=np.float32)
+
+    del indices32, indptr32
+
+    progress.desc = 'Removing zeros'
+    progress.refresh()
+    res.eliminate_zeros()
+
+    progress.desc = 'Done'
+    progress.refresh()
+
+    return res
