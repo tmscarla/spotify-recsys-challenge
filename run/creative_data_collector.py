@@ -75,7 +75,7 @@ tracks = tracks.merge(df, left_on='track_uri', right_on='track_uri', how='left')
 # Build dataframe for popularity
 uriList = []
 popList = []
-for key in popDct.keys():
+for key in popDict.keys():
     uriList.append(key)
     popList.append(popDict[key])
 df = pd.DataFrame()
