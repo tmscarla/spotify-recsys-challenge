@@ -69,7 +69,7 @@ NB: all the steps needs the virtual environment to be active
 #### Creative Track  TODO
 
 1. download or recreate the enriched dataset.
-    > python creative_data_collector.py client_id client_secret
+    > python creative_data_collector.py <client_id> <client_secret>
     
 2. create the basic matrices 
     > python gen_creative_layered_matrix.py
