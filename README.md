@@ -125,6 +125,10 @@ Submissions are evaluated using three different metrics and final rankings will 
 
 # Ensemble
 
+<p align="center">
+  <img width="100%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/ensemble.png">
+</p>
+
 # Postprocessing
 Once we computed our EURM (Estimated User Rating Matrix), we tried to improve our score leveraging on domain-specific patterns of the dataset. Here is a list of the most useful techniques that we have developed:
 
