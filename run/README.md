@@ -2,7 +2,7 @@
 
 ### ***Replicate our final recommendations***
  Here there are the two python scripts that ensemble the final matrices of our research.
- The matrices used are made placed in the final_npz_main and final_npz_creative folders and can be rebuilt following the steps lister below. 
+ You can find the matrices used in the *final_npz_main* and *final_npz_creative* folders and can be rebuilt following the steps below. 
  
 ### Rebuild from scratch 
 NB: all the steps needs the virtual environment to be active
