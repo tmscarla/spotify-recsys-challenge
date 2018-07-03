@@ -66,14 +66,43 @@ NB: all the steps needs the virtual environment to be active
     
 
    
-### Creative Track  TODO
+#### Creative Track  TODO
 
-* download or recreate the enriched dataset.
-    > python creative_data_collector.py client_id client_secret.
+1. download or recreate the enriched dataset.
+    > python creative_data_collector.py client_id client_secret
     
-* create the basic matrices 
-    @TODO the run to create all the matrices 
-    > recommenders/script/main/generate_all_npz.sh online 
-    > recommenders/script/main/generate_icm_layer.sh online
+2. create the basic matrices 
+    > python gen_creative_layered_matrix.py
+    
+    > recommenders/script/creative/generate_all_npz.sh online 
+    
+3. Base ensemble matrix: <br/> Run the bayesian optimization inside folder bayesian-scikit with the configuration below. when it reaches a convergence, run the script "ensemble_online_configurationname.sh" to build the matrix
+>  
+    path_jess = ROOT_DIR+'/recommenders/script/creative/online_npz/   ## the newly created matrices
+    
+    norm     ['max', 'max',    'max',   'max',  'max',  'max', 'max',  'l1',   'max',  'l1']
+    target_metric =  ['ndcg', 'ndcg', 'ndcg', 'ndcg', 'ndcg',  'ndcg',  'ndcg', 'ndcg', 'ndcg', 'ndcg']
+    
+    conf1 = ['nlp_fusion', 'top_pop']
+    conf2 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub','cf_ar','cf_al','nlp_fusion','top_pop_album_cat2','top_pop_track_cat2',
+                'cr_cb_ar']
+    conf3 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub', 'nlp_fusion',
+                'cr_cb_ar']
+    conf4 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub',
+                'cr_cb_ar']
+    conf5 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub', 'nlp_fusion',
+                'cr_cb_ar']
+    conf6 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub',
+                'cr_cb_ar']
+    conf7 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub', 'nlp_fusion',
+                'cr_cb_ar']
+    conf8 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub', 'nlp_fusion', 'hyb_j_main_cat8',
+                'cr_cb_ar', 'cr_cluster_creative']
+    conf9 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub', 'nlp_fusion', 'cb_ib_cat9' ,
+                'cr_cb_ar']
+    conf10 =['cb_al','cf_ib','cf_ub', 'hyb_j_main_cat10',
+                'cr_cb_ar', 'cr_cb_al_ar', 'cr_cf_feats_cat10', 'cr_cluster_creative', 'cr_cf_ar']
+
+
 
     
