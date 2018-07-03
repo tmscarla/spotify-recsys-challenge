@@ -8,20 +8,23 @@
 NB: all the steps needs the virtual environment to be active
 
 
-
 #### Main track
 
 1. Rebuild or download the tuned matrices of the tuned single algorithms
     
-    > recommenders/script/main/generate_all_npz.sh online
+    > recommenders/script/main/generate_all_npz.sh offline
+      recommenders/script/main/generate_icm_layer.sh offline
     
-    > recommenders/script/main/generate_icm_layer.sh online
+    > recommenders/script/main/generate_all_npz.sh online
+      recommenders/script/main/generate_icm_layer.sh online
     
     The matrices created are already with the parameters used for the final submission for every category. 
     The processes for each matrix cam be found in the relative python script.
 
 2. Base ensemble matrix: <br/> Run the bayesian optimization inside folder bayesian-scikit with the configuration below. when it reaches a convergence, run the script "ensemble_online_configurationname.sh" to build the matrix
-
+   <br/>The search for the best parameter should be done for the OFFLINE, then it will use the same parameters for the ONLINE.
+   In the *bayesian_scikit* folder there is an example of this ensemble
+    
 >  
     path_simo = ROOT_DIR+'/recommenders/script/main/online_npz/   ## the newly created matrices
     
@@ -72,7 +75,8 @@ NB: all the steps needs the virtual environment to be active
     > python creative_data_collector.py <client_id> <client_secret>
     
 2. create the basic matrices 
-    > python gen_creative_layered_matrix.py
+
+    > python gen_creative_layered_matrix.py  # use the variable MODE for both ONLINE and OFFLINE
     
     > recommenders/script/creative/generate_all_npz.sh online 
     
