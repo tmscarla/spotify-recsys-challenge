@@ -14,8 +14,8 @@ The rest of the document is organized in the following way:
 
    * **Setup:** gives an overview of the project structure and instructions on how to gather data and 
    setting up everything in order tu run our scripts.
-   * **Preprocessing:**
-   * **Algorithms:**
+   * **Preprocessing:** here we list which data structures we used and how we combined features of the dataset.
+   * **Algorithms:** in this section we show the different algorithms which are behind each 
    * **Postprocessing:**
 
 ## Team members
@@ -77,11 +77,6 @@ After these steps you should have the /data folder organized as follows:
     > $ ./setup_ubuntu.sh
 3. Activate the virtualenv to run any of the python script in the repository
     > source py3env/bin/activate
-  
-## Running the recommender  
-
-follow the instructions in the **[run subfolder](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**
-
 
 ## Folders
 Here you have an overview of the struct of the project root: 
@@ -112,6 +107,9 @@ our final submissions, move to /run folder and run the following scripts:
 Once the computation is terminated, you should see the csv files ready to be submitted 
 in the /submissions folder.
 
+The previous scripts leverages on the fact that estimated user rating matrix for each algorithm have been previously computed.
+If you want to run each recommender separately, please follow the instructions in the **[Run Recommenders Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**
+
 ## Metrics
 Submissions are evaluated using three different metrics and inal rankings will be computed
  by using the **[Borda Count](https://en.wikipedia.org/wiki/Borda_count)** election strategy.
@@ -127,13 +125,18 @@ Submissions are evaluated using three different metrics and inal rankings will b
 # Postprocessing
 
  ## Requirements
-| Package              | Version        |
-| ---------------------|:--------------:|  
-| **scikit-learn**     |   >= 0.19.1    |   
-| **numpy**            |   >= 1.14      |   
-| **scipy**            |   >= 1.0.0     |   
-| **pandas**           |   >= 0.22.0    |  
-| **tqdm**             |   >= 4.19.5    |
-| **spotipy**          |   >= 2.4.4     |
-
+| Package                         | Version        |
+| --------------------------------|:--------------:|  
+| **scikit-learn**                |   >= 0.19.1    |   
+| **numpy**                       |   >= 1.14      |   
+| **scipy**                       |   >= 1.0.0     |   
+| **pandas**                      |   >= 0.22.0    |  
+| **tqdm**                        |   >= 4.19.5    |
+| **spotipy**                     |   >= 2.4.4     |
+| **bayesian-optimization**       |   >= 0.6.0     |
+| **matplotlib**                  |   >= 2.0.2     |
+| **psutil**                      |   >= 5.2.2     |
+| **sklearn**                     |   >= 0.19.0    |
+| **nltk**                        |   >= 3.2.4     |
+| **deap**                        |   >= 1.1.2     |
 
