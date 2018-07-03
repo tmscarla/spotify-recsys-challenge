@@ -15,8 +15,9 @@ The rest of the document is organized in the following way:
    * **Setup:** gives an overview of the project structure and instructions on how to gather data and 
    setting up everything in order tu run our scripts.
    * **Preprocessing:** here we list which data structures we used and how we combined features of the dataset.
-   * **Algorithms:** in this section we show the different algorithms which are behind each 
-   * **Postprocessing:**
+   * **Algorithms:** in this section we show the different algorithms which are behind each recommender and their performance.
+   * **Ensemble:** a section entirely dedicated to how we build our final recommender starting from different algorithms.
+   * **Postprocessing:** a set of postprocessing techniques which aim at increasing the prediction score by looking at the       domain of the problem.
 
 ## Team members
 We are Creamy Fireflies, a group of MSc students from Politecnico di Milano which
@@ -108,10 +109,10 @@ Once the computation is terminated, you should see the csv files ready to be sub
 in the /submissions folder.
 
 The previous scripts leverages on the fact that estimated user rating matrix for each algorithm have been previously computed.
-If you want to run each recommender separately, please follow the instructions in the **[Run Recommenders Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**
+If you want to run each recommender separately, please follow the instructions in the **[Run Recommenders Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**. If you are a challenge organizer and you are encountering some problems, do not hesitate to contact us via mail.
 
 ## Metrics
-Submissions are evaluated using three different metrics and inal rankings will be computed
+Submissions are evaluated using three different metrics and final rankings will be computed
  by using the **[Borda Count](https://en.wikipedia.org/wiki/Borda_count)** election strategy.
  
 # Preprocessing
@@ -122,7 +123,18 @@ Submissions are evaluated using three different metrics and inal rankings will b
 
 ## Creative track
 
+# Ensemble
+
 # Postprocessing
+Once we computed our EURM (Estimated User Rating Matrix), we tried to improve our score leveraging on domain-specific patterns of the dataset. Here is a list of the most useful techniques that we have developed:
+
+### GapBoost
+
+### TailBoost
+
+### AlbumBoost
+
+### Artists Clusters
 
  ## Requirements
 | Package                         | Version        |
