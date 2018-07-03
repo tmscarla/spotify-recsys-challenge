@@ -42,7 +42,7 @@ NB: all the steps needs the virtual environment to be active
 3. Run the python script to split the matrices into 4 clustered submatrices
     > gen_clustered_matrices_main.py
     
-4. Cluster approach (AR1,AR2,AR3,AR4) : <br/> Run the bayesian optimization tool for all the four newly created folders sets of matrices with the same configuration as the previous step.
+4. Cluster approach (cluster1,cluster2,cluster3,cluster4) : <br/> Run the bayesian optimization tool for all the four newly created folders sets of matrices with the same configuration as the previous step.
     
     When a run is finished, ensemble the matrix before to start the next bayesian becouse changing the folder location will affect the global bayesian settings.
     
@@ -62,11 +62,11 @@ NB: all the steps needs the virtual environment to be active
     >'/recommenders/script/main/online_npz/npz_ar4/'
     
 
-5. Run the run_main replacing the variables [ar1, ar2, ar3, ar4, ensemble] with a load to your matrices
+5. Run the run_main replacing the variables [cluster1, cluster2, cluster3, cluster4, ensemble] with a load to your matrices
     
 
    
-#### Creative Track  TODO
+#### Creative Track 
 
 1. download or recreate the enriched dataset.
     > python creative_data_collector.py <client_id> <client_secret>
@@ -77,6 +77,8 @@ NB: all the steps needs the virtual environment to be active
     > recommenders/script/creative/generate_all_npz.sh online 
     
 3. Base ensemble matrix: <br/> Run the bayesian optimization inside folder bayesian-scikit with the configuration below. when it reaches a convergence, run the script "ensemble_online_configurationname.sh" to build the matrix
+    The files with "cr" prefix are built from the scripts inside the creative folder and those matrices corresponds to the one made with the enriched dataset.
+    
 >  
     path_jess = ROOT_DIR+'/recommenders/script/creative/online_npz/   ## the newly created matrices
     
@@ -104,5 +106,29 @@ NB: all the steps needs the virtual environment to be active
                 'cr_cb_ar', 'cr_cb_al_ar', 'cr_cf_feats_cat10', 'cr_cluster_creative', 'cr_cf_ar']
 
 
+    
 
+4. Run the python script to split the base matrices into 4 clustered submatrices
+    > gen_clustered_matrices_creative.py
+    
+5. Cluster approach (cluster1,cluster2,cluster3,cluster4) : <br/> Run the bayesian optimization tool for all the four newly created folders sets of matrices with the same configuration as the previous step.
+     
+    When a run is finished, ensemble the matrix before to start the next bayesian becouse changing the folder location will affect the global bayesian settings.
+    
+    * cluster with only one artist
+        >'/recommenders/script/creative/online_npz/npz_ar1/' 
+    
+    * cluster with low variance of artists
+        log(#uniqueTracks / #uniqueArtists) < 1
+        >'/recommenders/script/creative/online_npz/npz_ar2/'    
+        
+    * cluster with medium variance of artists
+        log(#uniqueTracks / #uniqueArtists) < 2 
+        >'/recommenders/script/creative/online_npz/npz_ar3/'
+    
+    * cluster with high variance of artists
+        log(#uniqueTracks / #uniqueArtists) >= 2
+         >'/recommenders/script/creative/online_npz/npz_ar4/'
+    
+6. Run the run_main replacing the variables [cluster1, cluster2, cluster3, cluster4, ensemble] with a load to your matrices
     
