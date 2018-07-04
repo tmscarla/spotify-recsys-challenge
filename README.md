@@ -133,10 +133,30 @@ Submissions are evaluated using three different metrics and final rankings will 
 Once we computed our EURM (Estimated User Rating Matrix), we tried to improve our score leveraging on domain-specific patterns of the dataset. Here is a list of the most useful techniques that we have developed:
 
 ### GapBoost
+It is an heuristic which applies to playlists of categories 8 and 10 of the challenge set, where known tracks for each playlist
+are distributed at random. Since known tracks are not in order, there exsist "gaps" between each pair of known tracks. 
+We exploit this information by reordering our final prediction giving more information to those tracks which seemed to "fit"
+better between all the gaps of the playlist.
+
+The boost for each track is calculated as follows:
+
+TODO
+
+where S is a similarity matrix between tracks.
+
+
 
 ### TailBoost
+We applied this technique to categories 5, 6, 7, 9 of the challenge set, where known tracks for each playlist are given in order.
+The basic idea behind this approach is that the last tracks are the most informative about the "continuation" of a playlist, therefore
+we boosted all the top tracks similar to the last known tracks, starting from the tail and proceding back to the head
+with a discount factor.
+
+The implementation of the TailBoost is available in the */boosts/tail_boost.py* file. 
 
 ### AlbumBoost
+This approach leverages on the fact that some playlists are built collecting tracks in order from a specific album.
+Therefore in categories 3, 4, 7 and 9...
 
 ### Artists Clusters
 
