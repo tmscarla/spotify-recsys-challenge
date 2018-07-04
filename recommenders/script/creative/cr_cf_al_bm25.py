@@ -31,6 +31,7 @@ feats = ['alid']
 for feat in feats:
     icm_feat = dr.get_icm_refined_pid_feat(feat=feat, K=4, load_only=True,mode=mode)
     icm = sp.hstack([icm, icm_feat])
+icm = icm.tocsr()
 rec = CF_IB_BM25(urm=icm.T, binary=True, datareader=dr, mode=mode, verbose=True, verbose_evaluation= False)
 for c in configs_strange:
     pids = dr.get_test_pids(cat=c['cat'])
