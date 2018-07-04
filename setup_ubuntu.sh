@@ -22,13 +22,13 @@ sudo apt-get install unzip
 sudo apt-get install python3-tk
 sudo apt install virtualenv
 
-virtualenv -p /usr/bin/python3 py3envtms
+virtualenv -p /usr/bin/python3 py3e
 
 sleep 1
-source py3envtms/bin/activate
+source py3e/bin/activate
 
 echo ""
-echo ">>>>>>>>>>>>>>>>>> installing python packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+echo ">>>>>>>>>>>>>>>>>> Installing Python packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 echo ""
 sleep 1
 pip3 install pandas scipy numpy cython matplotlib tqdm sklearn psutil nltk deap regex
@@ -36,14 +36,14 @@ pip3 install bayesian-optimization spotipy
 
 
 echo ""
-echo ">>>>>>>>>>>>>>>>>> installing FireFlies REPO  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+echo ">>>>>>>>>>>>>>>>>> Installing repository package  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 echo ""
 sleep 1
 python setup.py sdist
 pip3 install -e .
 
 echo ""
-echo ">>>>>>>>>>>>>>>>>> compiling cython simone's module  <<<<<<<<<<<<<<<<<<<<<<<<<<<"
+echo ">>>>>>>>>>>>>>>>>> Compiling Cython modules  <<<<<<<<<<<<<<<<<<<<<<<<<<<"
 echo ""
 sleep 1
 cd recommenders/similarity
@@ -52,7 +52,7 @@ cd ../..
 
 
 echo ""
-echo ">>>>>>>>>>>>>>>>>> end  <<<<<<<<<<<<<<<<<<<<<<<<<<<"
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Done  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 echo ""
 
 
