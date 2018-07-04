@@ -31,6 +31,7 @@ for feat in feats:
 icm_ar = dr.get_icm(arid=True, alid=False)
 icm_al = dr.get_icm(arid = False, alid= True)
 icm = sp.hstack([icm, icm_ar, icm_al])
+icm = icm.tocsr()
 rec = CF_IB_BM25_strange(urm=icm.T, binary=True, datareader=dr, mode=mode, verbose=True, verbose_evaluation= False)
 for c in configs_strange:
     pids = dr.get_test_pids(cat=c['cat'])
