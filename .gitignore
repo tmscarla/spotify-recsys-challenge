@@ -9,10 +9,10 @@ data/original/*.csv
 data/test1/*.csv
 dataset/*
 results/*
+enriched/*
 
 # README, not ignoring them
 !data/README.md
-
 !results/README.md
 !results/img/README.md
 !submissions/README.md
@@ -20,6 +20,8 @@ results/*
 !submissions/README.md
 !data/original/README.md
 !data/test1/README.md
+!enriched/README.md
+!enriched/tmp_icms/README.md
 
 # SPOTIFY DATA
 spotify/data/*
