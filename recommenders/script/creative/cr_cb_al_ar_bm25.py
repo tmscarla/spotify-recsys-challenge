@@ -35,7 +35,7 @@ icm = sp.hstack([icm, icm_al])
 for feat in feats:
         icm_feat = dr.get_icm_refined_feat(feat=feat, K=4, load_only=True)
         icm = sp.hstack([icm, icm_feat, icm_al])
-    
+icm = icm.tocsr()    
 rec = CB_AL_AR_BM25(urm=urm, icm=icm, binary=True, datareader=dr, mode=mode, verbose=True, verbose_evaluation= False)
 
 eurm = sp.csr_matrix(urm.shape)
