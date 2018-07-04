@@ -4,7 +4,7 @@
 code/*
 
 # CSV
-data/*
+data/*.csv
 dataset/*
 submissions/*
 results/*

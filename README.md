@@ -40,10 +40,23 @@ suggested several state of the art approaches:
 
 # Setup
 
-## Data
+
+## Setting up the environment:
+
+1. Clone the repository on a machine running Ubuntu.
+2. Run the following script to install the virtualenv, Python dependencies, the package of the repository
+ and compile Cython code.
+    > $ ./setup_ubuntu.sh
+3. Activate the virtualenv to run any of the python script in the repository
+    > source py3env/bin/activate
+
+
+## Data Preprocessing 
 In order to load data in an easy way, we converted the original JSON files provided from Spotify in CSV files.
 Since data are not publicly available, we cannot include it in the repo.
 
+Include the *challenge_set.json* file into /data/challenge folder.
+ 
 There are two ways to include CSV files in the repo:
    * If you have **original JSON** files, run the following two scripts
    in order in the /run folder:
@@ -55,8 +68,6 @@ There are two ways to include CSV files in the repo:
    * If you are a **challenge organizer**, you can send us an email at creamy.fireflies@gmail.com
     and we will provide you as soon as possible the entire /data folder which you can simply add to the repo
     avoiding to convert all the files.
-
-Finally include the *challenge_set.json* file into /data/challenge folder.
  
 After these steps you should have the /data folder organized as follows:
    * original
@@ -69,15 +80,6 @@ After these steps you should have the /data folder organized as follows:
       * train_playlists.csv
    * challenge
       * challenge_set.json
-
-## Setting up the environment:
-
-1. Clone the repository on a machine running Ubuntu.
-2. Run the following script to install the virtualenv, Python dependencies, the package of the repository
- and compile Cython code.
-    > $ ./setup_ubuntu.sh
-3. Activate the virtualenv to run any of the python script in the repository
-    > source py3env/bin/activate
 
 ## Folders
 Here you have an overview of the struct of the project root: 
