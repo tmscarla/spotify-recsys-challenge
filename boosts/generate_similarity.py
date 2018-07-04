@@ -8,7 +8,7 @@ def generate_similarity(mode):
     Generate a similarity matrix (tracks x tracks) and save it on /data
     :param mode: 'offline' or 'online'
     """
-    save = True
+    save = False
     filename = 'similarity_tracks_'+mode+'.npz'
 
     dr = Datareader(mode=mode, only_load=True, verbose=False)
@@ -20,6 +20,8 @@ def generate_similarity(mode):
 
     if save:
         sp.save_npz(ROOT_DIR + '/data/' + filename, sim)
+    else:
+        return sim
 
 
 if __name__ == '__main__':
