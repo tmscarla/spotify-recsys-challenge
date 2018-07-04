@@ -8,12 +8,14 @@ data/*.csv
 data/original/*.csv
 data/test1/*.csv
 dataset/*
-submissions/*
 results/*
 
 # README, not ignoring them
 !data/README.md
+
 !results/README.md
+!results/img/README.md
+!submissions/README.md
 !results/csv/README.md
 !submissions/README.md
 !data/original/README.md
@@ -45,7 +47,6 @@ CreamyFireflies.egg-info/*
 dist/*
 
 # RESULTS
-results/*
 *.pyc
 
 # CYTHON FILES
