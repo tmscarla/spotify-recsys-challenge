@@ -1,4 +1,4 @@
-# SUBMISSIONS folder
+# Run Recommenders Guide
 
 ### ***Replicate our final recommendations***
  Here there are the two python scripts that ensemble the final matrices of our research.
@@ -6,7 +6,6 @@
  
 ### Rebuild from scratch 
 NB: all the steps needs the virtual environment to be active
-
 
 #### Main track
 
@@ -67,8 +66,6 @@ NB: all the steps needs the virtual environment to be active
 
 5. Run the run_main replacing the variables [cluster1, cluster2, cluster3, cluster4, ensemble] with a load to your matrices
     
-
-   
 #### Creative Track 
 
 1. download or recreate the enriched dataset.
