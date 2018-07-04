@@ -1,8 +1,12 @@
 #!/bin/bash
 
+
 echo ""
 echo ">>>>>>>>>>>>>>>>>> setup python <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 echo ""
+
+export LC_ALL=C
+alias python=python3
 
 sudo apt-get update
 sudo apt-get install python-pip
@@ -18,17 +22,17 @@ sudo apt-get install unzip
 sudo apt-get install python3-tk
 sudo apt install virtualenv
 
-virtualenv -p /usr/bin/python3 py3env
+virtualenv -p /usr/bin/python3 py3envtms
 
 sleep 1
-source py3env/bin/activate
+source py3envtms/bin/activate
 
 echo ""
 echo ">>>>>>>>>>>>>>>>>> installing python packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 echo ""
 sleep 1
-pip install pandas scipy numpy cython matplotlib tqdm sklearn psutil nltk deap regex
-pip install bayesian-optimization spotipy
+pip3 install pandas scipy numpy cython matplotlib tqdm sklearn psutil nltk deap regex
+pip3 install bayesian-optimization spotipy
 
 
 echo ""
@@ -36,7 +40,7 @@ echo ">>>>>>>>>>>>>>>>>> installing FireFlies REPO  <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 echo ""
 sleep 1
 python setup.py sdist
-pip install -e .
+pip3 install -e .
 
 echo ""
 echo ">>>>>>>>>>>>>>>>>> compiling cython simone's module  <<<<<<<<<<<<<<<<<<<<<<<<<<<"
