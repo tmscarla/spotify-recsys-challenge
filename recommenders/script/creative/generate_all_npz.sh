@@ -9,17 +9,8 @@ echo "cr_CB_AR"
 python cr_cf_ar_bm25.py $1 $2
 echo "cr_CF_AR"
 
-python cr_cf_feats_bm25.py $1 $2
-echo "cr_CF_FEATS"
-
 python cr_cf_feats_cat10_bm25.py $1 $2
 echo "cr_CF_FEATS_CAT10"
-
-python cr_cf_hyb8_bm25.py $1 $2
-echo "cr_CF_HYB8"
-
-python cr_cf_hyb10_bm25.py $1 $2
-echo "cr_CF_HYB10"
 
 python cr_cluster_creative_bm25.py $1 $2
 echo "cr_CLUSTER"
