@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 python cr_cb_al_ar_bm25.py $1 $2
 echo "cr_CB_AL"
 

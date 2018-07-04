@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 python cb_al.py $1 $2
 echo "CB_AL"
 python cb_ar.py $1 $2
