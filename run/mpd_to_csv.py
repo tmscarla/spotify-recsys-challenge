@@ -189,11 +189,11 @@ with open(path_save+"albums.csv", "w") as f:
     writer.writerows(albums)
 print ("albums.csv done")
     
-with open(path_save+"interactions.csv", "w") as f:
+with open(path_save+"train_interactions.csv", "w") as f:
     writer = csv.writer(f,delimiter = "\t",)
     writer.writerow(interaction_fields)
     writer.writerows(interactions)
-print ("interactions.csv done")
+print ("train_interactions.csv done")
 
 with open(path_save+"tracks.csv", "w") as f:
     writer = csv.writer(f,delimiter = "\t",)
