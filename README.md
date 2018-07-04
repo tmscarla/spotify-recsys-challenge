@@ -115,9 +115,11 @@ If you want to run each recommender separately, please follow the instructions i
 Submissions are evaluated using three different metrics and final rankings will be computed
  by using the **[Borda Count](https://en.wikipedia.org/wiki/Borda_count)** election strategy.
  The three metrics are:
-    * R-Precision
-    * Normalized discounted cumulative gain
-    * Recommended Songs clicks
+ 
+ * R-Precision
+ * Normalized discounted cumulative gain
+ * Recommended Songs clicks
+ 
  You can find a more detailed explanation of the metrics on the **[rules page](https://recsys-challenge.spotify.com/rules)** of the challenge. 
  
 # Preprocessing
