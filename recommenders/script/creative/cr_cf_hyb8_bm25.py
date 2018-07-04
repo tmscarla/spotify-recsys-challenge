@@ -33,7 +33,7 @@ icm = sp.hstack([icm, icm_ar, icm_al])
 icm_pl = urm.copy().T
 icm_pl.data = np.full(icm_pl.data.shape[0],pow(w, .5))
 icm = sp.hstack([icm, icm_pl])
-
+icm = icm.tocsr()
 rec = CF_IB_BM25(urm=icm.T, binary=False, datareader=dr, mode=mode, verbose=True, verbose_evaluation= False)
 for c in configs_strange:
     pids = dr.get_test_pids(cat=c['cat'])
