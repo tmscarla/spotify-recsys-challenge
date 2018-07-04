@@ -10,13 +10,14 @@ from utils.datareader import Datareader
 This file has the only purpose to extract from the challenge set json file a list
 of useful csv in order to make submissions in the right format.
 
-python challenge_set_to_csv.py path/to/challenge_set.json
+python challenge_set_to_csv.py "absolute path to the directory containing challenge_set.json"
 """
+path_original = ROOT_DIR+"/data/original/"
 
 
 def convert(path):
     # LOAD DATA
-    data = json.load(open(ROOT_DIR + "/data/challenge/challenge_set.json"))
+    data = json.load(open(path+"challenge_set.json"))
     dr = Datareader(mode='online', only_load=True, verbose=False)
 
     # CHALLENGE PLAYLISTS
@@ -33,19 +34,9 @@ def convert(path):
     target_playlists_df = target_playlists_df[cols]
 
     # Save csv file
-    target_playlists_df.to_csv('test_playlists.csv', sep='\t', index=False)
+    target_playlists_df.to_csv(path_original+'test_playlists.csv', sep='\t', index=False)
 
-    pids = []
-    for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
-        pids.extend(dr.get_test_pids(cat=i))
-    test_playlists_df = pd.read_csv('test_playlists.csv', sep='\t', encoding='utf-8')
 
-    test_playlists_df = test_playlists_df.set_index(['pid'])
-
-    # Load and resave csv file ordered by cat
-    test_playlists_df = test_playlists_df.reindex(pids)
-    test_playlists_df['pid'] = test_playlists_df.index
-    test_playlists_df.to_csv('test_playlists.csv', sep='\t', index=False, encoding='utf-8')
 
     # Dict uri -> tid
     tracks_df = dr.get_df_tracks()
@@ -70,7 +61,27 @@ def convert(path):
     all_interactions = pd.DataFrame(d)
     all_interactions.sort_values(by=['pid'], inplace=True)
 
-    all_interactions.to_csv('test_interactions.csv', sep='\t', index=False)
+    all_interactions.to_csv(path_original+'test_interactions.csv', sep='\t', index=False)
+
+
+
+
+    ################### reorder playlists
+    pids = []
+    for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+        pids.extend(dr.get_test_pids(cat=i))
+    test_playlists_df = pd.read_csv(path_original + 'test_playlists.csv', sep='\t', encoding='utf-8')
+
+    test_playlists_df = test_playlists_df.set_index(['pid'])
+
+    # Load and resave csv file ordered by cat
+    test_playlists_df = test_playlists_df.reindex(pids)
+    test_playlists_df['pid'] = test_playlists_df.index
+    test_playlists_df.to_csv(path_original + 'test_playlists.csv', sep='\t', index=False, encoding='utf-8')
+
+
+
+
 
 
 if __name__ == '__main__':

@@ -14,6 +14,8 @@ results/*
 !results/README.md
 !results/csv/README.md
 !submissions/README.md
+!data/original/README.md
+!data/test1/README.md
 
 # SPOTIFY DATA
 spotify/data/*

@@ -7,7 +7,7 @@
 import json
 import os
 from pprint import *
-from tqdm import *
+from tqdm import tqdm
 from utils.definitions import ROOT_DIR
 import sys
 
