@@ -1,17 +1,7 @@
 #!/bin/sh
 
-
-python cr_cb_al_ar_bm25.py $1 $2
-echo "cr_CB_AL"
-
 python cr_cb_ar_bm25.py $1 $2
 echo "cr_CB_AR"
-
-python cr_cf_al_ar_bm25.py $1 $2
-echo "cr_CF_AL_AR"
-
-python cr_cf_al_bm25.py $1 $2
-echo "cr_CF_AL"
 
 python cr_cf_ar_bm25.py $1 $2
 echo "cr_CF_AR"
