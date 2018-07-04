@@ -5,6 +5,8 @@ code/*
 
 # CSV
 data/*.csv
+data/original/*.csv
+data/test1/*.csv
 dataset/*
 submissions/*
 results/*
