@@ -8,6 +8,7 @@ from utils.verify_submission import verify_submission
 from utils.definitions import ROOT_DIR
 from utils.datareader import Datareader
 import os
+import sys
 
 
 class Submitter(object):
@@ -64,28 +65,28 @@ class Submitter(object):
             file_name = file_name + '.gz'
 
         # Open the file to write the header
-        f = open(ROOT_DIR + '/submissions/' + file_name, 'a')
+        f = open(ROOT_DIR + '/submissions/' + file_name, '+w')
         f.write(test_header + '\n')
+        f.flush()
 
         if gzipped:
-            submission_df.to_csv(f, sep=',', header=False, index=False, compression='gzip')
+            submission_df.to_csv(f, sep=',', mode='a', header=False, index=False, compression='gzip')
         else:
-            submission_df.to_csv(f, sep=',', header=False, index=False)
+            submission_df.to_csv(f, sep=',', mode='a', header=False, index=False)
 
         # Close and save the file
         f.close()
 
         # Verify the correctness of the submission
-        print('Verifying...', flush=True)
+        print('Verifying submission...', flush=True)
         if verify:
             errors = verify_submission(ROOT_DIR + '/data/challenge/challenge_set.json',
                                        ROOT_DIR + '/submissions/' + file_name)
 
             if errors == 0:
-                print("Submission is OK! No errors found. C'mon Creamy Fireflies!")
+                print('Submission successfully saved in /submission!')
+                print("No errors found. C'mon Creamy Fireflies!")
             else:
                 print("Your submission has", errors, "errors. If you submit it, it will be rejected.")
                 os.remove(ROOT_DIR + '/submissions/' + file_name)
-
-
 
