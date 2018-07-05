@@ -128,8 +128,14 @@ Submissions are evaluated using three different metrics and final rankings will 
  You can find a more detailed explanation of the metrics on the **[rules page](https://recsys-challenge.spotify.com/rules)** of the challenge. 
  
 # Preprocessing
+Once we converted the original JSON files into CSV, we gather data into matrices in order to perform recommendations:
+
+* **URM** (User Rating Matrix): a matrix (playlists x tracks) with binary interactions.
+* **ICM** (Item Content Matrix): a matrix (tracks x features) with artist id and album id as features.
+* **UCM** (User Content Matrix): a matrix (playlists x features) with tokens extracted from titles as features.
 
 # Algorithms
+Here you can find a list of the main algorithms used to compute the final recommendation. Each algorithm outputs a EURM (Estimated User Rating Matrix) of shape (10K, 2.2M) where on the rows we have the 10K test playlists and on the columns all the unique tracks present in the *Million Playlist Dataset*.
 
 ## Main track
 
