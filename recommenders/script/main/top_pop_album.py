@@ -1,6 +1,6 @@
 import sys
 from utils.definitions import ROOT_DIR
-from scripts.top_pop_p import Top_pop_p
+from recommenders.script.main.top_pop_p import Top_pop_p
 import scipy.sparse as sps
 
 arg = sys.argv[1:]
