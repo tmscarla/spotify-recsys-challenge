@@ -201,9 +201,9 @@ with open(path_save+"tracks.csv", "w") as f:
     writer.writerows(tracks)
 print ("tracks.csv done")
 
-with open(path_save+"playlists.csv", "w") as f:
+with open(path_save+"train_playlists.csv", "w") as f:
     writer = csv.writer(f,delimiter = "\t",)
     writer.writerow(playlist_fields)
     writer.writerows(playlists)
-print ("playlists.csv done")
+print ("train_playlists.csv done")
 
