@@ -1,5 +1,5 @@
 """
-OFFLINE> python last_songs.py offline 25 100 500
+OFFLINE> python last_songs.py offline
 """
 
 from utils.datareader import Datareader
@@ -10,23 +10,22 @@ from recommenders.r_p_3_beta import R_p_3_beta
 from utils.pre_processing import norm_max_row
 from utils.post_processing import eurm_remove_seed
 from utils.definitions import ROOT_DIR
+import utils.sparse as ut
 import numpy as np
 import scipy.sparse as sps
 import datetime
 from sklearn.preprocessing import normalize
 import sys
 
-
-
-
 if __name__ == '__main__':
 
-    mode = "offline"
+    arg = sys.argv[1:]
+    mode = arg[0]
+    complete_name = mode+'_npz/'+'cb_ib_cat9_'+mode+'.npz'
+
     cut = 25
     knn = 100
     topk = 750
-
-    complete_name = 'cb_ib_cat9_'+mode+'.npz'
 
     if mode=="offline":
 
@@ -40,6 +39,10 @@ if __name__ == '__main__':
         urm = dr.get_urm()
         pids = dr.get_test_pids()
         urm.data = np.ones(len(urm.data))
+
+        ut.inplace_set_rows_zero(X=urm,target_rows=pids) #don't learn from challange set
+        urm.eliminate_zeros()
+
         p_ui = normalize(urm, norm="l1")
         p_iu = normalize(urm.T, norm="l1")
         top = urm.sum(axis=0).A1
@@ -64,7 +67,7 @@ if __name__ == '__main__':
         sps.save_npz(complete_name, rec.eurm)
 
         ev = Evaluator(dr)
-        ev.evaluate(eurm_to_recommendation_list(rec.eurm), 'prova', verbose=True)
+        ev.evaluate(eurm_to_recommendation_list(rec.eurm), 'rp3', verbose=True)
 
     if mode == "online":
 
@@ -82,6 +85,10 @@ if __name__ == '__main__':
         urm = dr.get_urm()
         pids = dr.get_test_pids()
         urm.data = np.ones(len(urm.data))
+
+        ut.inplace_set_rows_zero(X=urm,target_rows=pids) #don't learn from challange set
+        urm.eliminate_zeros()
+
         p_ui = normalize(urm, norm="l1")
         p_iu = normalize(urm.T, norm="l1")
         top = urm.sum(axis=0).A1
@@ -108,7 +115,7 @@ if __name__ == '__main__':
         rec.eurm = eurm_remove_seed(rec.eurm,dr)
 
         #submission
-        sb.submit(recommendation_list=eurm_to_recommendation_list(rec.eurm), name=name, track="main", verify=True, gzipped=False)
+        sb.submit(recommendation_list=eurm_to_recommendation_list(rec.eurm), name='rp3', track="main", verify=True, gzipped=False)
 
 
 
