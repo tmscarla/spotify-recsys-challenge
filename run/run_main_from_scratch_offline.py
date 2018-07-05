@@ -77,6 +77,8 @@ if __name__ == '__main__':
 
             for name, value_from_bayesian in best_params_dict.items():
                 all_matrices_names.add(name)
+
+        print("[ reassembling", cluster[0], "]",flush=True)
         for name in  tqdm(all_matrices_names,desc='loading matrices'):
             if name not in matrices_loaded.keys() and name!='norm':
                 # print(cluster[1]+name+'_offline.npz')
@@ -147,6 +149,8 @@ if __name__ == '__main__':
     FINAL = ab.boost_eurm(categories=[3, 4, 7, 9], gamma=2, top_k=[3, 3, 10, 40])
 
     ev.evaluate(recommendation_list=eurm_to_recommendation_list(FINAL), name='main_track_offline')
+
+
 
 
 

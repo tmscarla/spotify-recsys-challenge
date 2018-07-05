@@ -146,7 +146,12 @@ if __name__ == '__main__':
     ab = AlbumBoost(dr, FINAL)
     FINAL = ab.boost_eurm(categories=[3, 4, 7, 9], gamma=2, top_k=[3, 3, 10, 40])
 
-    ev.evaluate(recommendation_list=eurm_to_recommendation_list(FINAL), name='main_track_online')
+    rec_list = eurm_to_recommendation_list(eurm_remove_seed(FINAL,dr ))
+
+    sb = Submitter(dr)
+    sb.submit(rec_list, name='main_track', track='main')
+
+
 
 
 
