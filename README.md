@@ -153,9 +153,16 @@ better between all the gaps of the playlist.
 
 The boost for each track is calculated as follows:
 
+<p align="center">
+  <img width="30%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/gapboost.png">
+</p>
 
-where S is a similarity matrix between tracks. And g are the tracks to the left and to the right of the boost.
+where S is a similarity matrix between tracks. And g are the tracks to the left and to the right of the gap.
 GapBoost improves in particular the R-Precision metric.
+
+<p align="center">
+  <img width="60%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/gb_diagram.png">
+</p>
 
 
 ### TailBoost
