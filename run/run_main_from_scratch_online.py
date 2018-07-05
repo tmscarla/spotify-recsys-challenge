@@ -116,12 +116,7 @@ if __name__ == '__main__':
 
     CLUSTERED_MATRIX = eurm_list[0]+eurm_list[1]+eurm_list[2]+eurm_list[3]
 
-    ev = Evaluator(dr)
-    ev.evaluate(recommendation_list=eurm_to_recommendation_list(CLUSTERED_MATRIX), name='clustered_online')
-
     ENSEMBLED = eurm_list[4]
-
-    ev.evaluate(recommendation_list=eurm_to_recommendation_list(ENSEMBLED), name='ensembled_online')
 
     ####### POSTPROCESSING #################################################################
 

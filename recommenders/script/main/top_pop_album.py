@@ -10,6 +10,7 @@ mode = arg[0]
 t = Top_pop_p()
 eurm = t.get_top_pop_album(mode)
 sps.save_npz(ROOT_DIR+"/recommenders/script/main/"+mode+"_npz/top_pop_2_album_"+mode+".npz", eurm)
+
 # from utils.datareader import Datareader
 # dr = Datareader(verbose=False, mode='offline', only_load=True)
 # from utils.evaluator import Evaluator
