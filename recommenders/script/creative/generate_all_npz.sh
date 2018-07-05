@@ -1,5 +1,21 @@
 #!/bin/sh
 
+echo "START PERSONALIZED_TOP_POP_ALBUM"
+python top_pop_album.py $1
+echo "DONE PERSONALIZED_TOP_POP_ALBUM"
+
+echo "START PERSONALIZED_TOP_POP_TRACK"
+python top_pop_track.py $1
+echo "DONE PERSONALIZED_TOP_POP_TRACK"
+
+echo "START TOP_POP"
+python top_pop.py $1
+echo "DONE TOP_POP"
+
+echo "START CB IB CAT9"
+python cb_ib_cat9.py $1
+echo "DONE CB IB CAT9"
+
 python cr_cb_al_ar_bm25.py $1 $2
 echo "cr_CB_AL_AR"
 
@@ -39,14 +55,3 @@ echo "LAYER_CAT10"
 python nlp_fusion.py $1 $2
 echo "NLP_FUSION"
 
-echo "START PERSONALIZED_TOP_POP_ALBUM"
-python top_pop_album.py $1
-echo "DONE PERSONALIZED_TOP_POP_ALBUM"
-
-echo "START PERSONALIZED_TOP_POP_TRACK"
-python top_top_track.py $1
-echo "DONE PERSONALIZED_TOP_POP_TRACK"
-
-echo "START TOP_POP"
-python top_top.py $1
-echo "DONE TOP_POP"
