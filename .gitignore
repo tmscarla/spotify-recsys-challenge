@@ -10,6 +10,7 @@ data/test1/*.csv
 dataset/*
 results/*
 enriched/*
+submissions/*
 
 # README, not ignoring them
 !data/README.md
