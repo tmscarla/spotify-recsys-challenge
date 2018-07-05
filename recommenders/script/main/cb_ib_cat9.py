@@ -30,7 +30,7 @@ if __name__ == '__main__':
     if mode=="offline":
 
         #Data initialization
-        dr = Datareader(verbose=False, mode=mode, only_load=True, verbose=False)
+        dr = Datareader(verbose=False, mode=mode, only_load=True)
 
         #Recommender algorithm initialization
         rec = R_p_3_beta()
@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
         ### Submission ###
         #Data initialization
-        dr = Datareader(verbose=True, mode='online', only_load=True)
+        dr = Datareader(verbose=False, mode='online', only_load=True)
 
         #Recommender algorithm initialization
         rec = R_p_3_beta()
