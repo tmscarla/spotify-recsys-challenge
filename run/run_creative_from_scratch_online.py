@@ -21,17 +21,17 @@ if __name__ == '__main__':
 
     dr = Datareader(verbose=False, mode='online', only_load=True)
 
-    ar1_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar1/'
-    ar2_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar2/'
-    ar3_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar3/'
-    ar4_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar4/'
-    main_location= ROOT_DIR+'/recommenders/script/main/online_npz/'
+    ar1_location = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar1/'
+    ar2_location = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar2/'
+    ar3_location = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar3/'
+    ar4_location = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar4/'
+    creative_location= ROOT_DIR+'/recommenders/script/creative/online_npz/'
 
-    clusters = [ ('ar1', ar1_location),
-                 ('ar2', ar2_location),
-                 ('ar3', ar3_location),
-                 ('ar4', ar4_location),
-                 ('SUBMAIN',main_location)]
+    clusters = [ ('creativeFIRE_ar1', ar1_location),
+                 ('creativeFIRE_ar2', ar2_location),
+                 ('creativeFIRE_ar3', ar3_location),
+                 ('creativeFIRE_ar4', ar4_location),
+                 ('creativeFIRE',     creative_location)]
 
     file_names = {            'cb_ar':      "cb_ar_online.npz",
                               'cb_al':      "cb_al_online.npz",
@@ -61,8 +61,16 @@ if __name__ == '__main__':
                               'top_pop_album_cat2': 'top_pop_2_album_online.npz',
                               'top_pop_track_cat2': 'top_pop_2_track_online.npz',
 
-                              'cb_ib_cat9': 'cb_ib_cat9_online.npz'
-                              }
+                              'cb_ib_cat9': 'cb_ib_cat9_online.npz',
+
+                              ###### creative things
+                            'cr_cb_al_ar': 'cr_cb_al_ar_online.npz',
+                            'cr_cb_ar': 'cr_cb_ar_online.npz',
+                            'cr_cf_ar': 'cr_cf_ar_online.npz',
+                            'cr_cf_feats_cat10': 'cr_cf_feats_cat10_online.npz',
+                            'cr_cluster_creative': 'cr_cluster_creative_online.npz'
+
+    }
 
     eurm_list = []
 
@@ -121,7 +129,7 @@ if __name__ == '__main__':
     ####### POSTPROCESSING #################################################################
 
     # COMBINE
-    FINAL = combine_two_eurms(CLUSTERED_MATRIX, ENSEMBLED, cat_first=[3, 4, 5, 6, 8, 10])
+    FINAL = combine_two_eurms(CLUSTERED_MATRIX, ENSEMBLED, cat_first=[3, 4, 5, 8, 10])
     sim = generate_similarity('online')
 
     # HOLEBOOST
@@ -141,12 +149,12 @@ if __name__ == '__main__':
     ab = AlbumBoost(dr, FINAL)
     FINAL = ab.boost_eurm(categories=[3, 4, 7, 9], gamma=2, top_k=[3, 3, 10, 40])
 
-    sps.save_npz(ROOT_DIR+'/main_from_parameters.npz', FINAL)
+    sps.save_npz(ROOT_DIR+'/creative_from_parameters.npz', FINAL)
 
-    rec_list = eurm_to_recommendation_list(eurm_remove_seed(FINAL,dr ))
+    rec_list = eurm_to_recommendation_list(eurm_remove_seed(FINAL,dr))
 
     sb = Submitter(dr)
-    sb.submit(rec_list, name='main_track', track='main')
+    sb.submit(rec_list, name='creative_track', track='creative')
 
 
 

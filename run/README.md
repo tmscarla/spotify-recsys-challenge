@@ -1,135 +1,63 @@
 # Run Recommenders Guide
 
-### ***Replicate our final recommendations***
- Here there are the two python scripts that ensemble the final matrices of our research.
- You can find the matrices used in the *final_npz_main* and *final_npz_creative* folders and can be rebuilt following the steps below. 
+We setted up two different ways to run the project, the easyest and partial one and the complete one.
+
+  1. Only replicate our results using the estimated user rating matrices. 
+  
+  2. Rebuild from scratch all the matrices used in the final ensemble and in the clustered approach, using bayesian parameters to ensemble them.
+  
  
-### Rebuild from scratch 
-All the steps needs the **virtual environment** to be active, if you have not activated it yet,
+## 1. Run from ensembled matrices
+
+This procedure only replicates our final results. <br/>
+It ensembles a snapshot of the bayesian optimizations with the best parameters of our research.
+You can find the matrices used in the *final_npz_main* and *final_npz_creative* folders. 
+ 
+##### Main track
+> python run/run_main.py
+##### Creative track
+> python run/run_creative.py
+
+## 2. Rebuild from scratch using bayesian parameters
+ 
+All the steps for both main and creative track need the **virtual environment** to be active, if you have not activated it yet,
 place yourself in the root folder of the project and run the following command:
 > $  source py3e/bin/activate
 
 #### Main track
 
-1. Rebuild the tuned matrices of the single algorithms
+1. Rebuild the tuned matrices of the single algorithms.<br/>
+The matrices created are already with the parameters used for the final submission for every category. <br/>
+The processes for each matrix cam be found in the relative python script.
+
+    > $ recommenders/script/main/generate_icm_layer.sh online
     
     > $ recommenders/script/main/generate_all_npz.sh online
     
-    > $ recommenders/script/main/generate_icm_layer.sh online
-    
-    The matrices created are already with the parameters used for the final submission for every category. 
-    The processes for each matrix cam be found in the relative python script.
+2. Generate the clustered matrices from those ones
 
-2. Base ensemble matrix: <br/> Run the bayesian optimization inside folder bayesian-scikit with the configuration below. when it reaches a convergence, run the script "ensemble_online_configurationname.sh" to build the matrix
-   <br/>The search for the best parameter should be done for the OFFLINE, then it will use the same parameters for the ONLINE.
-   In the *bayesian_scikit* folder there is an example of this ensemble
+    > python run/gen_clustered_matrices_main.py online
     
->  
-    path_simo = ROOT_DIR+'/recommenders/script/main/online_npz/   ## the newly created matrices
-    
-    norm     ['max', 'max',    'max',   'max',  'max',  'max', 'max',  'l1',   'max',  'l1']
-    target_metric =  ['ndcg', 'ndcg', 'ndcg', 'ndcg', 'ndcg',  'ndcg',  'ndcg', 'ndcg', 'ndcg', 'ndcg']
-    
-    cat1       nlp_fusion, top_pop 
-    cat2	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, cf_al, cf_ar, nlp_fusion, top_pop_album_cat2, top_pop_track_cat2
-    cat3	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, nlp_fusion
-    cat4	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub
-    cat5	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, nlp_fusion
-    cat6	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub
-    cat7	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, nlp_fusion
-    cat8	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, nlp_fusion, hyb_j_main_cat8
-    cat9	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, nlp_fusion, cb_ib_cat9
-    cat10	   cb_ar, cb_al, cb_al_ar, cf_ib, cf_ub, nlp_fusion, hyb_j_main_cat10"
+3. Ensemble all the matrices with their relative weights
 
-3. Run the python script to split the matrices into 4 clustered submatrices
-    > gen_clustered_matrices_main.py
-    
-4. Cluster approach (cluster1,cluster2,cluster3,cluster4) : <br/> Run the bayesian optimization tool for all the four newly created folders sets of matrices with the same configuration as the previous step.
-    
-    When a run is finished, ensemble the matrix before to start the next bayesian becouse changing the folder location will affect the global bayesian settings.
-    
-    * cluster with only one artist
-    >'/recommenders/script/main/online_npz/npz_ar1/' 
-    
-    * cluster with low variance of artists
-    log(#uniqueTracks / #uniqueArtists) < 1
-    >'/recommenders/script/main/online_npz/npz_ar2/'    
-        
-    * cluster with medium variance of artists
-    log(#uniqueTracks / #uniqueArtists) < 2 
-    >'/recommenders/script/main/online_npz/npz_ar3/'
-    
-    * cluster with high variance of artists
-    log(#uniqueTracks / #uniqueArtists) >= 2
-    >'/recommenders/script/main/online_npz/npz_ar4/'
+    > python run/run_main_from_scratch_online.py
     
 
-5. Run the run_main replacing the variables [cluster1, cluster2, cluster3, cluster4, ensemble] with a load to your matrices
-    
-#### Creative Track 
+#### Creative rack
 
-1. download or recreate the enriched dataset.
-    > python creative_data_collector.py <client_id> <client_secret>
-    
-2. create the basic matrices 
+1. Rebuild the tuned matrices of the single algorithms.<br/> The algorythms that are called use the enriched dataset.
 
-    > python gen_creative_layered_matrix.py  # use the variable MODE for both ONLINE and OFFLINE
+    > $ recommenders/script/creative/generate_icm_layer.sh online
     
-    > recommenders/script/creative/generate_all_npz.sh online 
-    
-3. Base ensemble matrix: <br/> Run the bayesian optimization inside folder bayesian-scikit with the configuration below. when it reaches a convergence, run the script "ensemble_online_configurationname.sh" to build the matrix
-    The files with "cr" prefix are built from the scripts inside the creative folder and those matrices corresponds to the one made with the enriched dataset.
-    
->  
-    path_jess = ROOT_DIR+'/recommenders/script/creative/online_npz/   ## the newly created matrices
-    
-    norm     ['max', 'max',    'max',   'max',  'max',  'max', 'max',  'l1',   'max',  'l1']
-    target_metric =  ['ndcg', 'ndcg', 'ndcg', 'ndcg', 'ndcg',  'ndcg',  'ndcg', 'ndcg', 'ndcg', 'ndcg']
-    
-    conf1 = ['nlp_fusion', 'top_pop']
-    conf2 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub','cf_ar','cf_al','nlp_fusion','top_pop_album_cat2','top_pop_track_cat2',
-                'cr_cb_ar']
-    conf3 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub', 'nlp_fusion',
-                'cr_cb_ar']
-    conf4 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub',
-                'cr_cb_ar']
-    conf5 = ['cf_ib','cb_ar', 'cb_al','cb_al_ar','cf_ub', 'nlp_fusion',
-                'cr_cb_ar']
-    conf6 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub',
-                'cr_cb_ar']
-    conf7 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub', 'nlp_fusion',
-                'cr_cb_ar']
-    conf8 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub', 'nlp_fusion', 'hyb_j_main_cat8',
-                'cr_cb_ar', 'cr_cluster_creative']
-    conf9 = ['cf_ib','cb_ar','cb_al','cb_al_ar','cf_ub', 'nlp_fusion', 'cb_ib_cat9' ,
-                'cr_cb_ar']
-    conf10 =['cb_al','cf_ib','cf_ub', 'hyb_j_main_cat10',
-                'cr_cb_ar', 'cr_cb_al_ar', 'cr_cf_feats_cat10', 'cr_cluster_creative', 'cr_cf_ar']
-
-
-    
-
-4. Run the python script to split the base matrices into 4 clustered submatrices
-    > gen_clustered_matrices_creative.py
-    
-5. Cluster approach (cluster1,cluster2,cluster3,cluster4) : <br/> Run the bayesian optimization tool for all the four newly created folders sets of matrices with the same configuration as the previous step.
+    > $ recommenders/script/creative/generate_all_npz.sh online
      
-    When a run is finished, ensemble the matrix before to start the next bayesian becouse changing the folder location will affect the global bayesian settings.
+2. Generate the clustered matrices from those ones
+
+    > python run/gen_clustered_matrices_creative.py online
     
-    * cluster with only one artist
-        >'/recommenders/script/creative/online_npz/npz_ar1/' 
+3. Ensemble all the matrices with their relative weights
+
+    > python run/run_creative_from_scratch_online.py   
     
-    * cluster with low variance of artists
-        log(#uniqueTracks / #uniqueArtists) < 1
-        >'/recommenders/script/creative/online_npz/npz_ar2/'    
-        
-    * cluster with medium variance of artists
-        log(#uniqueTracks / #uniqueArtists) < 2 
-        >'/recommenders/script/creative/online_npz/npz_ar3/'
-    
-    * cluster with high variance of artists
-        log(#uniqueTracks / #uniqueArtists) >= 2
-         >'/recommenders/script/creative/online_npz/npz_ar4/'
-    
-6. Run the run_main replacing the variables [cluster1, cluster2, cluster3, cluster4, ensemble] with a load to your matrices
-    
+   
+
