@@ -38,3 +38,15 @@ python cb_layer_cat10.py $1 $2
 echo "LAYER_CAT10"
 python nlp_fusion.py $1 $2
 echo "NLP_FUSION"
+
+echo "START PERSONALIZED_TOP_POP_ALBUM"
+python top_pop_album.py $1
+echo "DONE PERSONALIZED_TOP_POP_ALBUM"
+
+echo "START PERSONALIZED_TOP_POP_TRACK"
+python top_top_track.py $1
+echo "DONE PERSONALIZED_TOP_POP_TRACK"
+
+echo "START TOP_POP"
+python top_top.py $1
+echo "DONE TOP_POP"
