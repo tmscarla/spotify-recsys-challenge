@@ -30,7 +30,7 @@ if __name__ == '__main__':
     if mode=="offline":
 
         #Data initialization
-        dr = Datareader(verbose=False, mode=mode, only_load=True)
+        dr = Datareader(verbose=False, mode=mode, only_load=True, verbose=False)
 
         #Recommender algorithm initialization
         rec = R_p_3_beta()
@@ -97,7 +97,7 @@ if __name__ == '__main__':
         rec.fit(p_ui, p_iu, top, pids)
 
         #Computing similarity/model
-        rec.compute_model(top_k= knn, shrink=100, alpha=0.5, beta=0.5, verbose=True)
+        rec.compute_model(top_k= knn, shrink=250, alpha=0.5, beta=0.5, verbose=True)
 
         #Computing ratings
         rec.compute_rating(top_k=topk,verbose=True, small=True)
