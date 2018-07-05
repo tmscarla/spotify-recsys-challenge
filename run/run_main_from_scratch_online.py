@@ -19,13 +19,13 @@ if __name__ == '__main__':
     norms['max'] = norm_max_row
     norms['l1']  = norm_l1_row
 
-    dr = Datareader(verbose=False, mode='offline', only_load=True)
+    dr = Datareader(verbose=False, mode='online', only_load=True)
 
-    ar1_location = ROOT_DIR+'/recommenders/script/main/offline_npz/npz_ar1/'
-    ar2_location = ROOT_DIR+'/recommenders/script/main/offline_npz/npz_ar2/'
-    ar3_location = ROOT_DIR+'/recommenders/script/main/offline_npz/npz_ar3/'
-    ar4_location = ROOT_DIR+'/recommenders/script/main/offline_npz/npz_ar4/'
-    main_location= ROOT_DIR+'/recommenders/script/main/offline_npz/'
+    ar1_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar1/'
+    ar2_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar2/'
+    ar3_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar3/'
+    ar4_location = ROOT_DIR+'/recommenders/script/main/online_npz/npz_ar4/'
+    main_location= ROOT_DIR+'/recommenders/script/main/online_npz/'
 
     clusters = [ ('ar1', ar1_location),
                  ('ar2', ar2_location),
@@ -33,35 +33,35 @@ if __name__ == '__main__':
                  ('ar4', ar4_location),
                  ('SUBMAIN',main_location)]
 
-    file_names = {            'cb_ar':  "cb_ar_offline.npz",
-                              'cb_al':  "cb_al_offline.npz",
-                              'cb_al_ar':  "cb_al_ar_offline.npz",
-                              'cf_ib':     "cf_ib_offline.npz",
-                              'cf_ub':     "cf_ub_offline.npz",
+    file_names = {            'cb_ar':      "cb_ar_online.npz",
+                              'cb_al':      "cb_al_online.npz",
+                              'cb_al_ar':   "cb_al_ar_online.npz",
+                              'cf_ib':      "cf_ib_online.npz",
+                              'cf_ub':      "cf_ub_online.npz",
 
-                              'cf_tom_album':  "cf_al_offline.npz",
-                              'cf_tom_artist': "cf_ar_offline.npz",
+                              'cf_tom_album': "cf_al_online.npz",
+                              'cf_tom_artist': "cf_ar_online.npz",
 
-                              'cf_ar':  "cf_ar_offline.npz",
-                              'cf_al':  "cf_al_offline.npz",
+                              'cf_ar':  "cf_ar_online.npz",
+                              'cf_al':  "cf_al_online.npz",
 
-                              'cf_ib_new':  "cf_ib_offline.npz",
-                              'cf_ub_new':  "cf_ub_offline.npz",
+                              'cf_ib_new':  "cf_ib_online.npz",
+                              'cf_ub_new':  "cf_ub_online.npz",
 
-                              'hyb_j_main_cat10':  'cb_layer_cat10_offline.npz',
-                              'hyb_j_main_cat8':  'cb_layer_cat8_offline.npz',
+                              'hyb_j_main_cat10':  'cb_layer_cat10_online.npz',
+                              'hyb_j_main_cat8':  'cb_layer_cat8_online.npz',
 
                               # from keplero
                               'top_pop': 'top_pop.npz',
 
-                              'nlp_fusion': 'nlp_fusion_offline.npz',
+                              'nlp_fusion': 'nlp_fusion_online.npz',
 
                               ##### things for single categories:
 
-                              'top_pop_album_cat2': 'top_pop_2_album_offline.npz',
-                              'top_pop_track_cat2': 'top_pop_2_track_offline.npz',
+                              'top_pop_album_cat2': 'top_pop_2_album_online.npz',
+                              'top_pop_track_cat2': 'top_pop_2_track_online.npz',
 
-                              'cb_ib_cat9': 'cb_ib_cat9_offline.npz'
+                              'cb_ib_cat9': 'cb_ib_cat9_online.npz'
                               }
 
     eurm_list = []
@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 all_matrices_names.add(name)
         for name in  tqdm(all_matrices_names,desc='loading matrices'):
             if name not in matrices_loaded.keys() and name!='norm':
-                # print(cluster[1]+name+'_offline.npz')
+                # print(cluster[1]+name+'_online.npz')
                 matrices_loaded[name] = eurm_remove_seed(sps.load_npz(cluster[1]+file_names[name]), dr)
 
         rec_list = [[] for x in range(10000)]
@@ -117,17 +117,17 @@ if __name__ == '__main__':
     CLUSTERED_MATRIX = eurm_list[0]+eurm_list[1]+eurm_list[2]+eurm_list[3]
 
     ev = Evaluator(dr)
-    ev.evaluate(recommendation_list=eurm_to_recommendation_list(CLUSTERED_MATRIX), name='clustered_offline')
+    ev.evaluate(recommendation_list=eurm_to_recommendation_list(CLUSTERED_MATRIX), name='clustered_online')
 
     ENSEMBLED = eurm_list[4]
 
-    ev.evaluate(recommendation_list=eurm_to_recommendation_list(ENSEMBLED), name='ensembled_offline')
+    ev.evaluate(recommendation_list=eurm_to_recommendation_list(ENSEMBLED), name='ensembled_online')
 
     ####### POSTPROCESSING #################################################################
 
     # COMBINE
-    FINAL = combine_two_eurms(CLUSTERED_MATRIX, ENSEMBLED, cat_first=[3,4, 5, 6, 8, 10])
-    sim = generate_similarity('offline')
+    FINAL = combine_two_eurms(CLUSTERED_MATRIX, ENSEMBLED, cat_first=[3, 4, 5, 6, 8, 10])
+    sim = generate_similarity('online')
 
     # HOLEBOOST
     hb = HoleBoost(similarity=sim, eurm=FINAL, datareader=dr, norm=norm_l1_row)
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     ab = AlbumBoost(dr, FINAL)
     FINAL = ab.boost_eurm(categories=[3, 4, 7, 9], gamma=2, top_k=[3, 3, 10, 40])
 
-    ev.evaluate(recommendation_list=eurm_to_recommendation_list(FINAL), name='main_track_offline')
+    ev.evaluate(recommendation_list=eurm_to_recommendation_list(FINAL), name='main_track_online')
 
 
 
