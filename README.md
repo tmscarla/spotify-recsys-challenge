@@ -48,7 +48,7 @@ suggested several state of the art approaches:
  and compile Cython code.
     > $ ./setup_ubuntu.sh
 3. Activate the virtualenv to run any of the python script in the repository
-    > source py3env/bin/activate
+    > source py3e/bin/activate
 
 
 ## Data Preprocessing 
@@ -80,6 +80,8 @@ After these steps you should have the /data folder organized as follows:
       * train_playlists.csv
    * challenge
       * challenge_set.json
+   * enriched
+   * test1
 
 ## Folders
 Here you have an overview of the struct of the project root: 
@@ -111,7 +113,8 @@ Once the computation is terminated, you should see the csv files ready to be sub
 in the /submissions folder.
 
 The previous scripts leverages on the fact that estimated user rating matrix for each algorithm have been previously computed.
-If you want to run each recommender separately, please follow the instructions in the **[Run Recommenders Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**. If you are a challenge organizer and you are encountering some problems, do not hesitate to contact us via mail.
+If you don't want to use intermediate results, but starting from scratch, please follow the instructions in the **[Run Recommenders Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**
+in order to run each recommender separately. If you are a challenge organizer and you are encountering some problems, do not hesitate to contact us via mail.
 
 ## Metrics
 Submissions are evaluated using three different metrics and final rankings will be computed
@@ -150,10 +153,8 @@ better between all the gaps of the playlist.
 
 The boost for each track is calculated as follows:
 
-TODO
 
 where S is a similarity matrix between tracks.
-
 
 
 ### TailBoost
@@ -162,11 +163,14 @@ The basic idea behind this approach is that the last tracks are the most informa
 we boosted all the top tracks similar to the last known tracks, starting from the tail and proceding back to the head
 with a discount factor.
 
+The TailBoost improved significantly Recommender Songs clicks and NDCG metrics.
 The implementation of the TailBoost is available in the */boosts/tail_boost.py* file. 
 
 ### AlbumBoost
 This approach leverages on the fact that some playlists are built collecting tracks in order from a specific album.
-Therefore in categories 3, 4, 7 and 9...
+Therefore in categories 3, 4, 7 and 9, where known tracks for each playlist are given in order, we used this heuristic
+to boost all the tracks from a specific album where the last two known tracks belong to the same album.
+The AlbumBoost improved the Recommender Songs clicks metric. 
 
 ### Artists Clusters
 

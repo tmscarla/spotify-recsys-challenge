@@ -91,7 +91,7 @@ class HoleBoost:
                 playlists_indices_to_boost = playlists_indices_to_boost + self.datareader.get_test_pids_indices(cat)
 
         # Select playlist
-        for i in tqdm(playlists_indices_to_boost, desc='HoleBoost'):
+        for i in tqdm(playlists_indices_to_boost, desc='GapBoost'):
             recommended_data = np.squeeze(self.eurm[i].toarray())
             recommended_tracks = np.argsort(recommended_data)[::-1][:k]
 
