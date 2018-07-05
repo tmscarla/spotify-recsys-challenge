@@ -115,7 +115,7 @@ if __name__ == '__main__':
         rec.eurm = eurm_remove_seed(rec.eurm,dr)
 
         #submission
-        sb.submit(recommendation_list=eurm_to_recommendation_list(rec.eurm), name='rp3', track="main", verify=True, gzipped=False)
+        #sb.submit(recommendation_list=eurm_to_recommendation_list(rec.eurm), name='rp3', track="main", verify=True, gzipped=False)
 
 
 
