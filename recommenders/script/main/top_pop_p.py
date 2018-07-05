@@ -24,9 +24,9 @@ class Top_pop_p(object):
         :return: csr_matrix filled with the reccomendation for the cat 2 following album
         '''
         if mode=="online":
-            eurm = sps.lil_matrix(self.urm_of.shape)
+            eurm = sps.lil_matrix(self.urm_on.shape)
             pids = self.dr_on.get_test_pids(cat=2)
-            pids_all = self.dr_of.get_test_pids()
+            pids_all = self.dr_on.get_test_pids()
             ucm_album = self.dr_of.get_ucm_albums().tocsc()
             album_dic = self.dr_of.get_track_to_album_dict()
 
@@ -73,9 +73,9 @@ class Top_pop_p(object):
         '''
         if mode=="online":
 
-            eurm = sps.lil_matrix(self.urm_of.shape)
+            eurm = sps.lil_matrix(self.urm_on.shape)
             pids = self.dr_on.get_test_pids(cat=2)
-            pids_all = self.dr_of.get_test_pids()
+            pids_all = self.dr_on.get_test_pids()
 
             for row in tqdm(pids):
                 track_ind = self.urm_on.indices[self.urm_on.indptr[row]:self.urm_on.indptr[row + 1]][0]
@@ -111,3 +111,6 @@ class Top_pop_p(object):
 
         return eurm.copy().tocsr()
 
+if __name__ == '__main__':
+    t = Top_pop_p()
+    t.get_top_pop_album("online")
