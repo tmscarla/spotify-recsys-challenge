@@ -24,8 +24,8 @@ if __name__ == '__main__':
     complete_name = mode+'_npz/'+'cb_ib_cat9_'+mode+'.npz'
 
     cut = 25
-    knn = 100
-    topk = 750
+    knn = 850 #850
+    topk = 750 
 
     if mode=="offline":
 
@@ -40,8 +40,8 @@ if __name__ == '__main__':
         pids = dr.get_test_pids()
         urm.data = np.ones(len(urm.data))
 
-        ut.inplace_set_rows_zero(X=urm,target_rows=pids) #don't learn from challange set
-        urm.eliminate_zeros()
+        #ut.inplace_set_rows_zero(X=urm,target_rows=pids) #don't learn from challange set
+        #urm.eliminate_zeros()
 
         p_ui = normalize(urm, norm="l1")
         p_iu = normalize(urm.T, norm="l1")
@@ -51,23 +51,23 @@ if __name__ == '__main__':
         rec.fit(p_ui, p_iu, top, pids)
 
         #Computing similarity/model
-        rec.compute_model(top_k= knn, shrink=100, alpha=0.5, beta=0.5, verbose=True)
+        rec.compute_model(top_k= knn, shrink=250, alpha=0.5, beta=0.5, verbose=True) #250
 
         #Computing ratings
-        rec.compute_rating(top_k=topk,verbose=True, small=True)
-        normal_eurm = rec.eurm.copy()
+        #rec.compute_rating(top_k=topk,verbose=True, small=True)
+        #normal_eurm = rec.eurm.copy()
 
         # INJECTING URM POS with only last 25 songs
         rec.urm = dr.get_last_n_songs_urm(n=cut)
 
         #Computing ratings
         rec.compute_rating(top_k=topk,verbose=True, small=True)
-        lastsongs_eurm = rec.eurm.copy()
+        #lastsongs_eurm = rec.eurm.copy()
 
         sps.save_npz(complete_name, rec.eurm)
 
         ev = Evaluator(dr)
-        ev.evaluate(eurm_to_recommendation_list(rec.eurm), 'rp3', verbose=True)
+        ev.evaluate(eurm_to_recommendation_list(rec.eurm,remove_seed=True,datareader=dr), 'rp3', verbose=True)
 
     if mode == "online":
 
