@@ -1,5 +1,6 @@
 from fast_import import *
 import sys
+from utils.definitions import ROOT_DIR
 
 arg = sys.argv[1:]
 #arg = ['offline']
@@ -20,8 +21,8 @@ dr = Datareader(mode=mode, only_load=True, verbose=False)
 
 urm = sp.csr_matrix(dr.get_urm(),dtype=np.float)
 eurm = sp.csr_matrix(urm.shape)
-if mode=='offline': icm = sp.csr_matrix(sp.load_npz('../../data/hybrid_icm_cat10_offline.npz'),dtype=np.float)
-if mode=='online': icm = sp.csr_matrix(sp.load_npz('../../data/hybrid_icm_cat10_online.npz'),dtype=np.float)
+if mode=='offline': icm = sp.csr_matrix(sp.load_npz(ROOT_DIR+'/data/hybrid_icm_cat10_offline.npz'),dtype=np.float)
+if mode=='online': icm = sp.csr_matrix(sp.load_npz(ROOT_DIR+'/data/hybrid_icm_cat10_online.npz'),dtype=np.float)
 
 icm = icm.tocsr()
 
