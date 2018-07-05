@@ -6,12 +6,14 @@ from utils.datareader import Datareader
 from utils.definitions import ROOT_DIR
 import numpy as np
 import scipy.sparse as sps
-import os
+import os, sys
 
+
+mode = sys.argv[1] # online or offline
 
 if __name__ == '__main__':
 
-    dr = Datareader(mode='online', only_load=True)
+    dr = Datareader(mode=mode, only_load=True)
 
     track_to_artist_dict = dr.get_track_to_artist_dict()
     track_to_album_dict = dr.get_track_to_album_dict()
@@ -48,10 +50,10 @@ if __name__ == '__main__':
 
 
     ## folder creation
-    ar1 = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar1/'
-    ar2 = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar2/'
-    ar3 = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar3/'
-    ar4 = ROOT_DIR+'/recommenders/script/creative/online_npz/npz_ar4/'
+    ar1 = ROOT_DIR+'/recommenders/script/creative/'+mode+'_npz/npz_ar1/'
+    ar2 = ROOT_DIR+'/recommenders/script/creative/'+mode+'_npz/npz_ar2/'
+    ar3 = ROOT_DIR+'/recommenders/script/creative/'+mode+'_npz/npz_ar3/'
+    ar4 = ROOT_DIR+'/recommenders/script/creative/'+mode+'_npz/npz_ar4/'
 
     folders = [ar1,ar2,ar3,ar4]
 
@@ -59,10 +61,10 @@ if __name__ == '__main__':
         if not os.path.exists(folder):
             os.makedirs(folder)
 
-    directory_npz= ROOT_DIR+'/recommenders/script/creative/online_npz/'
+    directory_npz= ROOT_DIR+'/recommenders/script/creative/'+mode+'_npz/'
 
     filenames = list(
-        map(lambda x: directory_npz + x, list(filter(lambda x: 'online' in x, os.listdir(directory_npz)))))
+        map(lambda x: directory_npz + x, list(filter(lambda x: mode in x, os.listdir(directory_npz)))))
 
 
     ## selecting lines for each cluster
@@ -81,24 +83,24 @@ if __name__ == '__main__':
 
     ## writing the clustered matrices
 
-    for path_eurm_offline in filenames:
+    for path_eurm in filenames:
 
-        eurm = sps.load_npz(path_eurm_offline)
-        print(path_eurm_offline)
+        eurm = sps.load_npz(path_eurm)
+        print(path_eurm)
 
         eurm_cluster_1_art = csr_matrix(eurm.copy())
         inplace_set_rows_zero(eurm_cluster_1_art, cluster_1_artist_skip_lines)
-        sps.save_npz(ar1 + path_eurm_offline.split('/')[-1], eurm_cluster_1_art.tocsr())
+        sps.save_npz(ar1 + path_eurm.split('/')[-1], eurm_cluster_1_art.tocsr())
 
         eurm_cluster_2_art = csr_matrix(eurm.copy())
         inplace_set_rows_zero(eurm_cluster_2_art, cluster_2_artist_skip_lines)
-        sps.save_npz(ar2 + path_eurm_offline.split('/')[-1], eurm_cluster_2_art.tocsr())
+        sps.save_npz(ar2 + path_eurm.split('/')[-1], eurm_cluster_2_art.tocsr())
 
         eurm_cluster_3_art = csr_matrix(eurm.copy())
         inplace_set_rows_zero(eurm_cluster_3_art, cluster_3_artist_skip_lines)
-        sps.save_npz(ar3 + path_eurm_offline.split('/')[-1], eurm_cluster_3_art.tocsr())
+        sps.save_npz(ar3 + path_eurm.split('/')[-1], eurm_cluster_3_art.tocsr())
 
         eurm_cluster_4_art = csr_matrix(eurm.copy())
         inplace_set_rows_zero(eurm_cluster_4_art, cluster_4_artist_skip_lines)
-        sps.save_npz(ar4 + path_eurm_offline.split('/')[-1], eurm_cluster_4_art.tocsr())
+        sps.save_npz(ar4 + path_eurm.split('/')[-1], eurm_cluster_4_art.tocsr())
 
