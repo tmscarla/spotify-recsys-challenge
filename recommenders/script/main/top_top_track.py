@@ -4,7 +4,7 @@ import scipy.sparse as sps
 from utils.definitions import ROOT_DIR
 
 arg = sys.argv[1:]
-mode = "offline"
+mode = arg[0]
 
 
 t = Top_pop_p()
