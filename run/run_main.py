@@ -22,7 +22,7 @@ sb = Submitter(dr)
 cluster1 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar1_online.npz')
 cluster2 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar2_online.npz')
 cluster3 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar3_online.npz')
-cluster4 = sps.load_npz(ROOT_DIR + '/final_npz_main/ensembled_ar4_online.npz')
+cluster4 = sps.load_npz(ROOT_DIR + '/fin©al_npz_main/ensembled_ar4_online.npz')
 
 clustered_approach_online = cluster1 + cluster2 + cluster3 + cluster4
 
@@ -35,8 +35,8 @@ ensembled = ensembled1 + ensembled2
 
 # COMBINE
 eurm_ens = combine_two_eurms(clustered_approach_online, ensembled, cat_first=[4, 5, 6, 8, 10])
-
 sim = generate_similarity('online')
+
 # HOLEBOOST
 hb = HoleBoost(similarity=sim, eurm=eurm_ens, datareader=dr, norm=norm_l1_row)
 eurm_ens = hb.boost_eurm(categories=[8], k=300, gamma=1)

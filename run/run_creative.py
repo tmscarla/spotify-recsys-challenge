@@ -30,8 +30,10 @@ ensembled1 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_CREATIVE_onl
 ensembled2 = sps.load_npz(ROOT_DIR + '/final_npz_creative/ensembled_CREATIVE_online_half2.npz')
 
 ensembled = ensembled1 + ensembled2
+
 ####### POSTPROCESSING #################################################################
 
+# COMBINE
 eurm_ens = combine_two_eurms(clustered_approach_online, ensembled, cat_first=[3, 4, 5, 8, 10])
 sim = generate_similarity('online')
 

@@ -5,17 +5,17 @@
  You can find the matrices used in the *final_npz_main* and *final_npz_creative* folders and can be rebuilt following the steps below. 
  
 ### Rebuild from scratch 
-NB: all the steps needs the virtual environment to be active
+All the steps needs the **virtual environment** to be active, if you have not activated it yet,
+place yourself in the root folder of the project and run the following command:
+> $  source py3e/bin/activate
 
 #### Main track
 
-1. Rebuild or download the tuned matrices of the tuned single algorithms
+1. Rebuild the tuned matrices of the single algorithms
     
-    > recommenders/script/main/generate_all_npz.sh offline
-      recommenders/script/main/generate_icm_layer.sh offline
+    > $ recommenders/script/main/generate_all_npz.sh online
     
-    > recommenders/script/main/generate_all_npz.sh online
-      recommenders/script/main/generate_icm_layer.sh online
+    > $ recommenders/script/main/generate_icm_layer.sh online
     
     The matrices created are already with the parameters used for the final submission for every category. 
     The processes for each matrix cam be found in the relative python script.

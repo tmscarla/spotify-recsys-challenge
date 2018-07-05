@@ -154,7 +154,8 @@ better between all the gaps of the playlist.
 The boost for each track is calculated as follows:
 
 
-where S is a similarity matrix between tracks.
+where S is a similarity matrix between tracks. And g are the tracks to the left and to the right of the boost.
+GapBoost improves in particular the R-Precision metric.
 
 
 ### TailBoost
@@ -163,14 +164,14 @@ The basic idea behind this approach is that the last tracks are the most informa
 we boosted all the top tracks similar to the last known tracks, starting from the tail and proceding back to the head
 with a discount factor.
 
-The TailBoost improved significantly Recommender Songs clicks and NDCG metrics.
+TailBoost improves significantly Recommender Songs clicks and NDCG metrics.
 The implementation of the TailBoost is available in the */boosts/tail_boost.py* file. 
 
 ### AlbumBoost
 This approach leverages on the fact that some playlists are built collecting tracks in order from a specific album.
 Therefore in categories 3, 4, 7 and 9, where known tracks for each playlist are given in order, we used this heuristic
 to boost all the tracks from a specific album where the last two known tracks belong to the same album.
-The AlbumBoost improved the Recommender Songs clicks metric. 
+AlbumBoost improves the Recommender Songs clicks metric. 
 
 ### Artists Clusters
 
