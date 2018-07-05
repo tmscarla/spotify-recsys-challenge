@@ -45,9 +45,13 @@ The processes for each matrix cam be found in the relative python script.
 
 #### Creative rack
 
+0. Download our enriched data or recreate the enriched dataset with the following instruction.
+
+    > python creative_data_collector.py <client_id> <client_secret>
+
 1. Rebuild the tuned matrices of the single algorithms.<br/> The algorythms that are called use the enriched dataset.
 
-    > $ recommenders/script/creative/generate_icm_layer.sh online
+    > $ python gen_creative_layered_matrix.py
     
     > $ recommenders/script/creative/generate_all_npz.sh online
      
