@@ -1,12 +1,13 @@
 import sys
-from scripts.top_pop_p import Top_pop_p
+from recommenders.script.main.top_pop_p import Top_pop_p
 import scipy.sparse as sps
+from utils.definitions import ROOT_DIR
 
 arg = sys.argv[1:]
 mode = arg[0]
 
 
-if mode == "online":
-    t = Top_pop_p()
-    eurm = t.get_top_pop_track()
-    sps.save_npz("top_pop_2_album_"+mode+".npz", eurm)
+t = Top_pop_p()
+
+eurm = t.get_top_pop_track(mode)
+sps.save_npz(ROOT_DIR+"/recommenders/script/creative/"+mode+"_npz/top_pop_2_track_"+mode+".npz", eurm)
