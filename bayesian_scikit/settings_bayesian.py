@@ -2,8 +2,8 @@ from utils.definitions import dump_params_dict, ROOT_DIR
 import os
 import stat
 
-path_simo = ROOT_DIR + '/npz_simo/'
-path_altre = ROOT_DIR + '/npz_altre/'
+path_simo = ROOT_DIR + '/recommenders/script/main/offline_npz/npz_ar1/'
+path_altre = ROOT_DIR + '/recommenders/script/main/offline_npz/npz_ar1/'
 
 this_configuration_name = 'example'
 
@@ -44,21 +44,14 @@ file_locations_offline = {'cb_ar': path_simo + "cb_ar_offline.npz",
                           # from keplero
                           'top_pop': path_altre + 'top_pop.npz',
 
-                          'nlp': path_altre + 'nlp_offline.npz',
                           'nlp_fusion': path_altre + 'nlp_fusion_offline.npz',
-
-                          'slim': path_altre + 'slim_offline.npz',
-
-                          'als': path_altre + 'als_offline.npz',
 
                           ##### things for single categories:
 
                           'top_pop_album_cat2': path_altre + 'top_pop_2_album_offline.npz',
-                          'top_pop_pers2': path_altre + 'top_pop_2_track_offline.npz',
                           'top_pop_track_cat2': path_altre + 'top_pop_2_track_offline.npz',
 
-                          'cb_ib_cat9': path_altre + 'cb_ib_cat9_offline.npz',
-                          'cat9_rp3': path_altre + 'cat9_cf_ib_vecchio_offline.npz'
+                          'cb_ib_cat9': path_altre + 'cb_ib_cat9_offline.npz'
 
                           }
 
@@ -82,17 +75,13 @@ file_locations_online = {'cb_ar': path_simo + "cb_ar_online.npz",
                          # from keplero, dovrebbero esser per tutte le cat
                          'top_pop': path_altre + 'top_pop.npz',
 
-                         'nlp': path_altre + 'nlp_online.npz',
                          'nlp_fusion': path_altre + 'nlp_fusion_online.npz',
-
-                         'slim': path_altre + 'slim_online.npz',
 
                          ##### things for single categories:
                          'cb_ib_cat9': path_altre + 'cb_ib_cat9_online.npz',
 
                          'top_pop_album_cat2': path_altre + 'top_pop_2_album_online.npz',
-                         'top_pop_track_cat2': path_altre + 'top_pop_2_track_online.npz',
-                         'top_pop_pers2': path_altre + 'top_pop_2_track_online.npz'
+                         'top_pop_track_cat2': path_altre + 'top_pop_2_track_online.npz'
 
                          }
 

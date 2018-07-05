@@ -60,3 +60,7 @@ echo "DONE PERSONALIZED_TOP_POP_TRACK"
 echo "START TOP_POP"
 python top_top.py $1
 echo "DONE TOP_POP"
+
+echo "START CB IB CAT9"
+python cb_ib_cat9.py $1
+echo "DONE CB IB CAT9"
