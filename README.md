@@ -48,7 +48,7 @@ suggested several state of the art approaches:
  and compile Cython code.
     > $ ./setup_ubuntu.sh
 3. Activate the virtualenv to run any of the python script in the repository
-    > source py3e/bin/activate
+    > $ source py3e/bin/activate
 
 
 ## Data Preprocessing 
@@ -157,7 +157,7 @@ The boost for each track is calculated as follows:
   <img width="30%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/gapboost.png">
 </p>
 
-where S is a similarity matrix between tracks. And g are the tracks to the left and to the right of the gap.
+where S is a similarity matrix between track, g are the tracks to the left and to the right of the gap, and d is the length of the gap.
 GapBoost improves in particular the R-Precision metric.
 
 <p align="center">
