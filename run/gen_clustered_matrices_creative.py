@@ -13,7 +13,7 @@ mode = sys.argv[1] # online or offline
 
 if __name__ == '__main__':
 
-    dr = Datareader(mode=mode, only_load=True)
+    dr = Datareader(mode=mode, only_load=True, verbose=False)
 
     track_to_artist_dict = dr.get_track_to_artist_dict()
     track_to_album_dict = dr.get_track_to_album_dict()
