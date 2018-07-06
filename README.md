@@ -101,8 +101,13 @@ Here you have an overview of the struct of the project root:
 These main folders have a README.md that explains the structure of the package.
 
 ## Reproduce our final results
-Once you have /data folder correctly filled with csv files, if you want to reproduce
-our final submissions, move to /run folder and run the following scripts:
+Once you have /data folder correctly filled with csv files, you can reproduce
+our final submissions in a quick way starting from pre-computed estimated user rating matrices. You can find all of these matrices in the *final_npz_main* and *final_npz_creative* folder. Just run the following scripts:
+ 
+##### Main track
+> $ python run/run_main.py
+##### Creative track
+> $ python run/run_creative.py
 
    * Main track
      > python run_main.py
@@ -112,7 +117,6 @@ our final submissions, move to /run folder and run the following scripts:
 Once the computation is terminated, you should see the csv files ready to be submitted 
 in the /submissions folder.
 
-The previous scripts leverages on the fact that estimated user rating matrix for each algorithm have been previously computed.
 If you don't want to use intermediate results, but starting from scratch, please follow the instructions in the **[Run Recommenders Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run)**
 in order to run each recommender separately. If you are a challenge organizer and you are encountering some problems, do not hesitate to contact us via mail.
 
