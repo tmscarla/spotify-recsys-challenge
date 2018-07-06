@@ -10,20 +10,19 @@ class Top_pop_p(object):
     Class that allow the user to get the personalized top pop build following track or album
     '''
     def __init__(self):
-
-        self.dr_on = Datareader(verbose=False, mode='online', only_load=True)
-        self.dr_of = Datareader(verbose=False, mode='offline', only_load=True)
-        self.urm_on = self.dr_on.get_urm()
-        self.urm_of = self.dr_of.get_urm()
-        self.urm_col = sps.csc_matrix(self.urm_of)
-        self.top_p = np.zeros(self.urm_of.shape[1])
-
+       1
 
     def get_top_pop_album(self, mode):
         '''
         :return: csr_matrix filled with the reccomendation for the cat 2 following album
         '''
+
         if mode == "online":
+            self.dr_on = Datareader(verbose=False, mode='online', only_load=True)
+            self.urm_on = self.dr_on.get_urm()
+            self.urm_col = sps.csc_matrix(self.urm_on)
+            self.top_p = np.zeros(self.urm_on.shape[1])
+
             eurm = sps.lil_matrix(self.urm_on.shape)
             pids = self.dr_on.get_test_pids(cat=2)
             pids_all = self.dr_on.get_test_pids()
@@ -45,6 +44,11 @@ class Top_pop_p(object):
             eurm = eurm_remove_seed(eurm, self.dr_on)
 
         elif mode == "offline":
+            self.dr_of = Datareader(verbose=False, mode='offline', only_load=True)
+            self.urm_of = self.dr_of.get_urm()
+            self.urm_col = sps.csc_matrix(self.urm_of)
+            self.top_p = np.zeros(self.urm_of.shape[1])
+
             eurm = sps.lil_matrix(self.urm_of.shape)
             pids = self.dr_of.get_test_pids(cat=2)
             pids_all = self.dr_of.get_test_pids()
@@ -72,6 +76,10 @@ class Top_pop_p(object):
         :return: csr_matrix filled with the reccomendation for the cat 2 following track
         '''
         if mode == "online":
+            self.dr_on = Datareader(verbose=False, mode='online', only_load=True)
+            self.urm_on = self.dr_on.get_urm()
+            self.urm_col = sps.csc_matrix(self.urm_on)
+            self.top_p = np.zeros(self.urm_on.shape[1])
 
             eurm = sps.lil_matrix(self.urm_on.shape)
             pids = self.dr_on.get_test_pids(cat=2)
@@ -91,6 +99,10 @@ class Top_pop_p(object):
             eurm = eurm_remove_seed(eurm, self.dr_on)
 
         elif mode == "offline":
+            self.dr_of = Datareader(verbose=False, mode='offline', only_load=True)
+            self.urm_of = self.dr_of.get_urm()
+            self.urm_col = sps.csc_matrix(self.urm_of)
+            self.top_p = np.zeros(self.urm_of.shape[1])
 
             eurm = sps.lil_matrix(self.urm_of.shape)
             pids = self.dr_of.get_test_pids(cat=2)
