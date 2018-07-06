@@ -32,7 +32,7 @@ The workflow to generate each matrix can be found in the relative python script.
     
     > $ ./generate_all_npz.sh online
     
-2. Then move back to the root folder of the project and launch the following script to generate the clustered matrices
+2. Then move to the /run folder of the project and launch the following script to generate the clustered matrices
     
     > $ python gen_clustered_matrices_main.py online
     
