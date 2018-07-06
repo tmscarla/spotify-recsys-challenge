@@ -2,7 +2,7 @@
 
 We set up two different ways to replicate our results:
 
-  1. Only replicate our results using previously computed estimated user rating matrices. 
+  1. Replicate our results using previously computed estimated user rating matrices. 
   
   2. Rebuild from scratch all the matrices used in the final ensemble and in the clustered approach, and then put them together in an ensemble using hard-coded parameters obtained using a bayesian optmiziator.
   
