@@ -1,3 +1,4 @@
+
 """
 OFFLINE> python last_songs.py offline
 """
@@ -25,7 +26,7 @@ if __name__ == '__main__':
 
     cut = 25
     knn = 850 #850
-    topk = 750 
+    topk = 750
 
     if mode=="offline":
 
@@ -53,10 +54,6 @@ if __name__ == '__main__':
         #Computing similarity/model
         rec.compute_model(top_k= knn, shrink=250, alpha=0.5, beta=0.5, verbose=True) #250
 
-        #Computing ratings
-        #rec.compute_rating(top_k=topk,verbose=True, small=True)
-        #normal_eurm = rec.eurm.copy()
-
         # INJECTING URM POS with only last 25 songs
         rec.urm = dr.get_last_n_songs_urm(n=cut)
 
@@ -73,7 +70,7 @@ if __name__ == '__main__':
 
         ### Submission ###
         #Data initialization
-        dr = Datareader(verbose=False, mode='online', only_load=True)
+        dr = Datareader(verbose=False, mode=mode, only_load=True)
 
         #Recommender algorithm initialization
         rec = R_p_3_beta()
@@ -99,26 +96,15 @@ if __name__ == '__main__':
         #Computing similarity/model
         rec.compute_model(top_k= knn, shrink=250, alpha=0.5, beta=0.5, verbose=True)
 
-        #Computing ratings
-        rec.compute_rating(top_k=topk,verbose=True, small=True)
-        normal_eurm = rec.eurm.copy()
-
         # INJECTING URM POS with only last 25 songs
         rec.urm = dr.get_last_n_songs_urm(n=cut)
 
         #Computing ratings
-        rec.compute_rating(top_k=topk,verbose=True, small=True)
-        lastsongs_eurm = rec.eurm.copy()
-
-        sps.save_npz(complete_name, rec.eurm)
+        rec.compute_rating(top_k=topk, datareader=dr,verbose=True, small=True)
 
         rec.eurm = eurm_remove_seed(rec.eurm,dr)
 
-        #submission
-        #sb.submit(recommendation_list=eurm_to_recommendation_list(rec.eurm), name='rp3', track="main", verify=True, gzipped=False)
-
-
-
+        sps.save_npz(complete_name, rec.eurm)
 
 
 
