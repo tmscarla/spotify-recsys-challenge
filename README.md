@@ -109,11 +109,6 @@ our final submissions in a quick way starting from pre-computed estimated user r
 ##### Creative track
 > $ python run/run_creative.py
 
-   * Main track
-     > python run_main.py
-   * Creative track
-     > python run_creative.py
-
 Once the computation is terminated, you should see the csv files ready to be submitted 
 in the /submissions folder.
 
