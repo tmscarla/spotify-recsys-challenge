@@ -1,26 +1,14 @@
 # Run Recommenders Guide
 
-We set up two different ways to replicate our results:
+Follow this guide to rebuild from scratch all the matrices used in the final ensemble and in the clustered approach.
 
-  1. Replicate our results using previously computed estimated user rating matrices. 
-  
-  2. Rebuild from scratch all the matrices used in the final ensemble and in the clustered approach, and then put them together in an ensemble using hard-coded parameters obtained using a bayesian optmiziator.
-  
- 
-## 1. Run from pre-computed matrices
-It ensembles a snapshot of the bayesian optimizations with the best parameters of our research.
-You can find the matrices used in the *final_npz_main* and *final_npz_creative* folders. 
- 
-##### Main track
-> $ python run/run_main.py
-##### Creative track
-> $ python run/run_creative.py
-
-## 2. Rebuild from scratch
 All the steps for both main and creative track need the **virtual environment** to be active, if you have not activated it yet, place yourself in the root folder of the project and run the following command:
 > $ source py3e/bin/activate
 
-#### Main track
+If you want to re-generate our final CSV ready to be submitted, please make sure that every script is called in **online**
+mode. Otherwise if you have filled the /data/test1 folder, and therefore you have our local validation set, you can call each script in **offline** mode for local testing.
+
+### Main track
 
 1. Rebuild the tuned matrices for each single algorithm.<br/>
 The matrices created are built with the best parameters used for the final submission for every category. <br/>
@@ -41,7 +29,7 @@ The workflow to generate each matrix can be found in the relative python script.
 4. Retrieve the CSV file ready to be submitted in the /submissions folder
     
 
-#### Creative rack
+### Creative rack
 
 0. Download our enriched data or recreate the enriched dataset with the following instruction.
 
