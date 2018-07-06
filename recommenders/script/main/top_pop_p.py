@@ -23,12 +23,12 @@ class Top_pop_p(object):
         '''
         :return: csr_matrix filled with the reccomendation for the cat 2 following album
         '''
-        if mode=="online":
+        if mode == "online":
             eurm = sps.lil_matrix(self.urm_on.shape)
             pids = self.dr_on.get_test_pids(cat=2)
             pids_all = self.dr_on.get_test_pids()
-            ucm_album = self.dr_of.get_ucm_albums().tocsc()
-            album_dic = self.dr_of.get_track_to_album_dict()
+            ucm_album = self.dr_on.get_ucm_albums().tocsc()
+            album_dic = self.dr_on.get_track_to_album_dict()
 
             for row in tqdm(pids):
                 track_ind = self.urm_on.indices[self.urm_on.indptr[row]:self.urm_on.indptr[row + 1]][0]
@@ -36,7 +36,7 @@ class Top_pop_p(object):
                 album = album_dic[track_ind]
                 playlists = ucm_album.indices[ucm_album.indptr[album]:ucm_album.indptr[album+1]]
 
-                top = self.urm_of[playlists].sum(axis=0).A1.astype(np.int32)
+                top = self.urm_on[playlists].sum(axis=0).A1.astype(np.int32)
                 track_ind_rec = top.argsort()[-501:][::-1]
 
                 eurm[row, track_ind_rec] = top[track_ind_rec]
@@ -44,7 +44,7 @@ class Top_pop_p(object):
             eurm = eurm.tocsr()[pids_all]
             eurm = eurm_remove_seed(eurm, self.dr_on)
 
-        elif mode=="offline":
+        elif mode == "offline":
             eurm = sps.lil_matrix(self.urm_of.shape)
             pids = self.dr_of.get_test_pids(cat=2)
             pids_all = self.dr_of.get_test_pids()
@@ -71,7 +71,7 @@ class Top_pop_p(object):
         '''
         :return: csr_matrix filled with the reccomendation for the cat 2 following track
         '''
-        if mode=="online":
+        if mode == "online":
 
             eurm = sps.lil_matrix(self.urm_on.shape)
             pids = self.dr_on.get_test_pids(cat=2)
@@ -80,9 +80,9 @@ class Top_pop_p(object):
             for row in tqdm(pids):
                 track_ind = self.urm_on.indices[self.urm_on.indptr[row]:self.urm_on.indptr[row + 1]][0]
 
-                playlists =  self.urm_col.indices[ self.urm_col.indptr[track_ind]: self.urm_col.indptr[track_ind+1]]
+                playlists = self.urm_col.indices[ self.urm_col.indptr[track_ind]: self.urm_col.indptr[track_ind+1]]
 
-                top = self.urm_of[playlists].sum(axis=0).A1.astype(np.int32)
+                top = self.urm_on[playlists].sum(axis=0).A1.astype(np.int32)
                 track_ind_rec = top.argsort()[-501:][::-1]
 
                 eurm[row, track_ind_rec] = top[track_ind_rec]
@@ -90,7 +90,7 @@ class Top_pop_p(object):
             eurm = eurm.tocsr()[pids_all]
             eurm = eurm_remove_seed(eurm, self.dr_on)
 
-        elif mode=="offline":
+        elif mode == "offline":
 
             eurm = sps.lil_matrix(self.urm_of.shape)
             pids = self.dr_of.get_test_pids(cat=2)
@@ -110,6 +110,7 @@ class Top_pop_p(object):
             eurm = eurm_remove_seed(eurm, self.dr_of)
 
         return eurm.copy().tocsr()
+
 
 if __name__ == '__main__':
     t = Top_pop_p()
