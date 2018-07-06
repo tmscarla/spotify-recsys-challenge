@@ -16,7 +16,7 @@ You can find the matrices used in the *final_npz_main* and *final_npz_creative* 
 ##### Creative track
 > $ python run/run_creative.py
 
-## 2. Rebuild from scratch using bayesian parameters
+## 2. Rebuild from scratch
 All the steps for both main and creative track need the **virtual environment** to be active, if you have not activated it yet, place yourself in the root folder of the project and run the following command:
 > $ source py3e/bin/activate
 
