@@ -1,15 +1,13 @@
 # Run Recommenders Guide
 
-We setted up two different ways to run the project, the easyest and partial one and the complete one.
+We set up two different ways to replicate our results:
 
-  1. Only replicate our results using the estimated user rating matrices. 
+  1. Only replicate our results using previously computed estimated user rating matrices. 
   
-  2. Rebuild from scratch all the matrices used in the final ensemble and in the clustered approach, using bayesian parameters to ensemble them.
+  2. Rebuild from scratch all the matrices used in the final ensemble and in the clustered approach, and then put them together in an ensemble using hard-coded parameters obtained using a bayesian optmiziator.
   
  
-## 1. Run from ensembled matrices
-
-This procedure only replicates our final results. <br/>
+## 1. Run from pre-computed matrices
 It ensembles a snapshot of the bayesian optimizations with the best parameters of our research.
 You can find the matrices used in the *final_npz_main* and *final_npz_creative* folders. 
  
@@ -19,28 +17,29 @@ You can find the matrices used in the *final_npz_main* and *final_npz_creative* 
 > python run/run_creative.py
 
 ## 2. Rebuild from scratch using bayesian parameters
- 
 All the steps for both main and creative track need the **virtual environment** to be active, if you have not activated it yet,
 place yourself in the root folder of the project and run the following command:
 > $  source py3e/bin/activate
 
 #### Main track
 
-1. Rebuild the tuned matrices of the single algorithms.<br/>
-The matrices created are already with the parameters used for the final submission for every category. <br/>
-The processes for each matrix cam be found in the relative python script.
-
-    > $ recommenders/script/main/generate_icm_layer.sh online
+1. Rebuild the tuned matrices for each single algorithm.<br/>
+The matrices created are built with the best parameters used for the final submission for every category. <br/>
+The workflow to generate each matrix can be found in the relative python script .
     
-    > $ recommenders/script/main/generate_all_npz.sh online
+    > $ cd recommenders/script/main
     
-2. Generate the clustered matrices from those ones
-
-    > python run/gen_clustered_matrices_main.py online
+    > $ ./generate_icm_layer.sh online
     
-3. Ensemble all the matrices with their relative weights
+    > $ ./generate_all_npz.sh online
+    
+2. Then move to the /run folder and generate the clustered matrices
+    
+    > $ python gen_clustered_matrices_main.py online
+    
+3. Still in the run folder, launch this script to ensemble all the matrices with their relative weights
 
-    > python run/run_main_from_scratch_online.py
+    > $ python run_main_from_scratch_online.py
     
 
 #### Creative rack
