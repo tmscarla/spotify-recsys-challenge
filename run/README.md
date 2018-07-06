@@ -28,8 +28,6 @@ The workflow to generate each matrix can be found in the relative python script.
     
     > $ cd recommenders/script/main
     
-    > $ ./generate_icm_layer.sh online
-    
     > $ ./generate_all_npz.sh online
     
 2. Then move to the /run folder of the project and launch the following script to generate the clustered matrices
