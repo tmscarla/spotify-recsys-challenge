@@ -1,25 +1,30 @@
 
 ## Bayesian Optimization Guide
 
+Follow this guide to rebuild from scratch all the matrices used in the final ensemble and in the clustered approach.
+The final model is based on a weighted sum of different models, in this guide we show also how to set the Bayesian optimiziation process on our local test set in order to find the best parameters.
+
+All the steps for both main and creative track need the **virtual environment** to be active, if you have not activated it yet, place yourself in the root folder of the project and run the following command:
+> $ source py3e/bin/activate
+
 ### Main Track
 
-1. Generate the validation_set from**run folder**
+1. If your **/data/test1** folder is empty, generate the local test set from **/run** folder:
     
-    > python testset_creator.py
+    > $ python generate_local_test_set.py
     
-2. Generate all the matrices for both online and offline from**recommenders/script/main folder**
-
-    > $ ./generate_all_npz.sh online
-    
+2. Generate all the matrices for both online and offline from **/recommenders/script/main** folder:
+   
     > $ ./generate_all_npz.sh offline
+    
+    > $ ./generate_all_npz.sh online
 
-3. Run the python script to split the matrices into 4 clustered submatrices from**run folder**
+3. Run the python script to split the matrices into 4 clustered submatrices in **/run** folder;
+        
+    > $ python gen_clustered_matrices_main.py offline
     
     > $ python gen_clustered_matrices_main.py online
-    
-    > $ python gen_clustered_matrices_main.py offline
    
-
 3. Bayesian optimization for Base ensemble matrix: <br/> Run the bayesian optimization inside folder bayesian-scikit with the configuration below. when it reaches a convergence, run the script "ensemble_online_configurationname.sh" to build the matrix
    <br/>The search for the best parameter should be done for the OFFLINE, then it will use the same parameters for the ONLINE.
    In the *bayesian_scikit* folder there is an example of this ensemble
@@ -29,7 +34,7 @@
     The folling commands work with the settings below.
    
         $ cd bayesian_scikit
-        python settings_bayesian.py
+        $ python settings_bayesian.py
         $ cd exampleConfig
         $ ./run_exampleConfig.sh
     
@@ -58,8 +63,6 @@
         $ ./ensemble_offline_exampleConfig.sh
         $ ./ensemble_online_exampleConfig.sh
        
-
-    
 5. Cluster approach (cluster1,cluster2,cluster3,cluster4) : <br/> Run the bayesian optimization tool for all the four folders created by sets of matrices with the same configuration as the previous step.
     
     The settings now must point to  the folder of the clustered matrics. 
