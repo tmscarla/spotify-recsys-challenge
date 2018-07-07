@@ -1,8 +1,8 @@
 
 ## Bayesian Optimization Guide
 
-Follow this guide to rebuild from scratch all the matrices used in the final ensemble and in the clustered approach.
-The final model is based on a weighted sum of different models, in this guide we show also how to set the Bayesian optimiziation process on our local test set in order to find the best parameters.
+Follow this guide to rebuild from scratch all the matrices used in the final ensemble and in the clustered approach.<br>
+The final model is based on a weighted sum of different models, in this guide we show also how to set the Bayesian optimization process on our local test set in order to find the best parameters.
 
 All the steps for both main and creative track need the **virtual environment** to be active, if you have not activated it yet, place yourself in the root folder of the project and run the following command:
 > $ source py3e/bin/activate
