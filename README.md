@@ -61,9 +61,9 @@ There are two ways to include CSV files in the repo:
    * If you have **original JSON** files, run the following two scripts
    in order in the /run folder:
     
-     > python mpd_to_csv.py    "absolute path to mpd/data folder with json files"
+     > $ python mpd_to_csv.py    "absolute path to mpd/data folder with json files"
      
-     > python challenge_set_to_csv.py   "absolute path to the directory containing challenge_set.json"
+     > $ python challenge_set_to_csv.py   "absolute path to the directory containing challenge_set.json"
      
    * If you are a **challenge organizer**, you can send us an email at creamy.fireflies@gmail.com
     and we will provide you as soon as possible the entire /data folder which you can simply add to the repo
