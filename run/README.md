@@ -8,7 +8,7 @@ All the steps for both main and creative track need the **virtual environment** 
 If you want to re-generate our final CSV ready to be submitted, please make sure that every script is called in **online**
 mode. Otherwise if you have filled the /data/test1 folder, and therefore you have our local validation set, you can call each script in **offline** mode for local testing.
 
-Our final model depends on a weighted sum of different models. The best weights have been found running a Bayesian optmiziation algorithm on our local test set. The following scripts are already equipped with the best parameters, but if you want to reproduce our optmiziation process please follow the **[Bayesian Optimization Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run/bayesian_opt.md)**
+Our final model depends on a weighted sum of different models. The best weights have been found running a Bayesian optmiziation algorithm on our local test set. The following scripts are already equipped with the best parameters, but if you want also to reproduce our optmization process please follow the **[Bayesian Optimization Guide](https://github.com/tmscarla/spotify-recsys-challenge/tree/master/run/bayesian_opt.md)**.
 
 ### Main track
 
