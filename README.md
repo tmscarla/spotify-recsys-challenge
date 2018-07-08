@@ -140,6 +140,13 @@ Here you can find a list of the main algorithms used to compute the final recomm
 
 ## Creative track
 
+### Audio feature layered content based recommendation
+
+<center class="half">
+    <img src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/loudness_hist_clustered.png">
+    <img src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/loudness_layered_icm.png">
+</center>
+
 # Ensemble
 In order to achieve a better prediction performance, we combined our different recommenders using a bayesian optimizator...
 
