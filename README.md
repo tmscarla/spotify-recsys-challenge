@@ -1,5 +1,6 @@
 <p align="center">
   <img width="75%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/spotifychallenge.png">
+  <img width="60%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/logo.png">
 </p>
 
 <br>
@@ -140,19 +141,33 @@ Once we converted the original JSON files into CSV, we gather data into matrices
 # Algorithms
 Here you can find a list of the main algorithms used to compute the final recommendation. Each algorithm outputs a EURM (Estimated User Rating Matrix) of shape (10K, 2.2M) where on the rows we have the 10K test playlists and on the columns all the unique tracks present in the *Million Playlist Dataset*.
 
-## Main track
+* Personalized Top Popular
+* Collaborative Filtering - Track based
+* Collaborative Filtering - Playlist based
+* Content Based Filtering - Track based
+* Content Based Filtering - Playlist based
+  * Track features
+  * Playlist name
 
-## Creative track
+## Creative Track
 
-### Audio feature layered content based recommendation
+We spent considerable e ort in trying to reconcile the tracks from the Million Playlist Dataset (MPD) provided by Spotify with those from external datasets but matching the name of the tracks and artists proved to be di cult and error-prone. Spotify Web API, on the other hand, being an API provided by Spotify itself, allowed us to retrieve for all tracks in MPD and in the Challenge Dataset following features: acousticnes, danceability, energy, instrumentalness, live- ness, loudness, speechiness, tempo, valence, popularity.
 
-<center class="half">
-    <img src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/loudness_hist_clustered.png">
-    <img src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/loudness_layered_icm.png">
+### Audio Feature Layered Content Based Filtering
+
+The creative CBF is implemented with the following steps:
+
+  1. Divide the tracks into 4 clusters with equal number of ele- ments, according to each feature. Take the loudness feature as an example, the clustering result is shown in Figure 4.
+  2. Considering feature clusters as a 3rd dimension, split the dense ICM into 4 sparse layers. A loudness based layered ICM is illustrated in Figure 5.
+  3. Concatenate 4 layers of sparse matrices horizontally in order to create a  nal sparsi ed ICM.
+  4. Applying the CBF approach to the sparsi ed ICM, we can calculate a sub-artist-level track-track similarity.
+
+<p align="center">
+    <img src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/loudness_hist_clustered.png">  
 </center>
 
 # Ensemble
-In order to achieve a better prediction performance, we combined our different recommenders using a bayesian optimizator...
+In order to take advantage of the diversity in the recommendations of all the N algorithms, we divided the results by category and we use them to compute, for each playlist, N sets of tracks scores such that the highest valued tracks will be recommended to that playlist.
 
 <p align="center">
   <img width="100%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/ensemble.png">
