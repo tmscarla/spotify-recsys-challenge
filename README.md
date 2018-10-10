@@ -185,7 +185,7 @@ better between all the gaps of the playlist.
 The boost for each track is calculated as follows:
 
 <p align="center">
-  <img width="30%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/gapboost.png">
+  <img width="50%" src="https://github.com/tmscarla/spotify-recsys-challenge/blob/master/images/gapboost.png">
 </p>
 
 where S is a similarity matrix between track, g are the tracks to the left and to the right of the gap, and d is the length of the gap.
