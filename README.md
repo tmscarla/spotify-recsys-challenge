@@ -211,8 +211,6 @@ Therefore in categories 3, 4, 7 and 9, where known tracks for each playlist are 
 to boost all the tracks from a specific album where the last two known tracks belong to the same album.
 AlbumBoost improves the Recommender Songs clicks metric. 
 
-### Artists Clusters
-
  ## Requirements
 | Package                         | Version        |
 | --------------------------------|:--------------:|  
