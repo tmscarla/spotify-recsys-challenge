@@ -151,13 +151,13 @@ Here you can find a list of the main algorithms used to compute the final recomm
 
 ## Creative Track
 
-We spent considerable e ort in trying to reconcile the tracks from the Million Playlist Dataset (MPD) provided by Spotify with those from external datasets but matching the name of the tracks and artists proved to be di cult and error-prone. Spotify Web API, on the other hand, being an API provided by Spotify itself, allowed us to retrieve for all tracks in MPD and in the Challenge Dataset following features: acousticnes, danceability, energy, instrumentalness, live- ness, loudness, speechiness, tempo, valence, popularity.
+We spent considerable effort in trying to reconcile the tracks from the Million Playlist Dataset (MPD) provided by Spotify with those from external datasets but matching the name of the tracks and artists proved to be difficult and error-prone. Spotify Web API, on the other hand, being an API provided by Spotify itself, allowed us to retrieve for all tracks in MPD and in the Challenge Dataset following features: acousticnes, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence, popularity.
 
 ### Audio Feature Layered Content Based Filtering
 
 The creative CBF is implemented with the following steps:
 
-  1. Divide the tracks into 4 clusters with equal number of ele- ments, according to each feature. Take the loudness feature as an example, the clustering result is shown in Figure 4.
+  1. Divide the tracks into 4 clusters with equal number of elements, according to each feature. Take the loudness feature as an example, the clustering result is shown in Figure 4.
   2. Considering feature clusters as a 3rd dimension, split the dense ICM into 4 sparse layers. A loudness based layered ICM is illustrated in Figure 5.
   3. Concatenate 4 layers of sparse matrices horizontally in order to create a  nal sparsi ed ICM.
   4. Applying the CBF approach to the sparsi ed ICM, we can calculate a sub-artist-level track-track similarity.
